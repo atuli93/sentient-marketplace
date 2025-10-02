@@ -1,54 +1,32 @@
 .crypto-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #1a1a1a;
   color: white;
-  padding: 10px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
 }
 
-.crypto-info {
-  font-weight: bold;
-}
-
-.support-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.support-section li {
-  margin-bottom: 5px;
-}
-
-.support-section a {
-  color: #8a2be2;
-  text-decoration: none;
-}
-
-.support-section a:hover {
-  text-decoration: underline;
-}
-
-.extras {
+.crypto-bar .left,
+.crypto-bar .right {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 1rem;
 }
 
-.theme-toggle {
+.crypto-bar a {
+  color: #8a2be2;
+  text-decoration: none;
+  margin-left: 0.25rem;
+}
+
+.crypto-bar button {
   background: none;
   border: none;
-  font-size: 20px;
   cursor: pointer;
   color: white;
-}
-
-.collector {
-  font-weight: 600;
-}
-
-.info {
-  font-style: italic;
-  font-size: 14px;
+  font-size: 1.2rem;
 }
