@@ -12,13 +12,13 @@
 .collections-header h1 {
   font-size: 48px;
   font-weight: 800;
-  color: #04111d;
+  color: #8a939b;
   margin-bottom: 8px;
 }
 
 .collections-header p {
   font-size: 20px;
-  color: #8a939b;
+  color: #04111d;
 }
 
 .collections-grid {
@@ -34,7 +34,7 @@
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  border: 1px solid #e5e8eb;
+  border: 1px solid #8a939b;
   transition: all 0.3s ease;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .collection-info p {
-  color: #8a939b;
+  color: #e5e8eb;
   font-size: 14px;
 }
 
@@ -68,11 +68,12 @@
   grid-column: 1 / -1;
   text-align: center;
   padding: 80px 20px;
-  color: #8a939b;
+  color: #04111d;
 }
 
 .coming-soon h2 {
   font-size: 32px;
   margin-bottom: 16px;
-  color: #04111d;
+  color: #8a939b;
 }
+
