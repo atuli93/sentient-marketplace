@@ -1,3 +1,4 @@
+// src/utils/nftHelpers.ts
 // NFT Market Data & Helper Functions for AI Assistant
 
 export interface NFTCollection {
@@ -8,83 +9,70 @@ export interface NFTCollection {
   description: string;
 }
 
-export interface MarketTrend {
-  category: string;
-  trending: string[];
-  growth: number;
+export interface MarketSummary {
+  totalVolume: string;
+  avgChange: string;
+  activeCollections: number;
 }
 
-// Mock NFT collections for AI responses
+// Mock NFT market data
 export const mockNFTCollections: NFTCollection[] = [
   {
     name: "Bored Ape Yacht Club",
     floorPrice: 12.5,
     volume24h: 450,
     change24h: 5.2,
-    description: "Iconic PFP collection with a strong community"
+    description: "Iconic PFP collection with strong community"
   },
   {
     name: "CryptoPunks",
     floorPrice: 45.8,
     volume24h: 320,
     change24h: -2.1,
-    description: "Original NFT collection with historical significance"
+    description: "Original NFT collection, historical significance"
   },
   {
     name: "Azuki",
     floorPrice: 8.9,
     volume24h: 280,
     change24h: 12.3,
-    description: "Anime-inspired NFT art with roadmap focus"
+    description: "Anime-inspired art with roadmap focus"
   },
   {
     name: "Pudgy Penguins",
     floorPrice: 6.2,
     volume24h: 195,
     change24h: 8.7,
-    description: "Cute penguin PFPs with an expanding ecosystem"
+    description: "Cute penguin PFPs with expanding ecosystem"
   }
 ];
 
-// Mock NFT market trends
-export const mockMarketTrends: MarketTrend[] = [
-  {
-    category: "PFP (Profile Pictures)",
-    trending: ["Azuki", "Pudgy Penguins", "Doodles"],
-    growth: 15.3
-  },
-  {
-    category: "Gaming NFTs",
-    trending: ["Axie Infinity", "Gods Unchained", "The Sandbox"],
-    growth: 22.7
-  },
-  {
-    category: "Art NFTs",
-    trending: ["Art Blocks", "SuperRare", "Foundation"],
-    growth: 8.9
-  }
-];
-
-// -----------------------------
+// ----------------------
 // Helper Functions
-// -----------------------------
+// ----------------------
 
-// Get top NFT collections by 24h volume
+/**
+ * Get the top NFT collections by 24h volume
+ */
 export const getTopCollections = (limit: number = 5): NFTCollection[] => {
   return mockNFTCollections
     .sort((a, b) => b.volume24h - a.volume24h)
     .slice(0, limit);
 };
 
-// Get trending NFT collections (positive 24h change)
+/**
+ * Get trending NFT collections (positive 24h change)
+ */
 export const getTrendingCollections = (): NFTCollection[] => {
   return mockNFTCollections.filter(c => c.change24h > 0);
 };
 
-// Get overall market summary
-export const getMarketSummary = () => {
-  const totalVolume = mockNFTCollections.reduce((sum, c) => sum + c.volume24h, 0);
-  const avgChange = mockNFTCollections.reduce((sum, c) => sum + c.change24h, 0) / mockNFTCollections.length;
+/**
+ * Get market summary data
+ */
+export const getMarketSummary = (): MarketSummary => {
+  const totalVolume = mockNFTCollections.reduce((sum, col) => sum + col.volume24h, 0);
+  const avgChange = mockNFTCollections.reduce((sum, col) => sum + col.change24h, 0) / mockNFTCollections.length;
 
   return {
     totalVolume: totalVolume.toFixed(0),
@@ -93,12 +81,16 @@ export const getMarketSummary = () => {
   };
 };
 
-// Format price in ETH
+/**
+ * Format ETH price
+ */
 export const formatPrice = (price: number): string => {
   return `${price} ETH`;
 };
 
-// Format volume (short-hand for thousands)
+/**
+ * Format volume for display
+ */
 export const formatVolume = (volume: number): string => {
   if (volume >= 1000) {
     return `${(volume / 1000).toFixed(1)}K ETH`;
@@ -106,15 +98,29 @@ export const formatVolume = (volume: number): string => {
   return `${volume} ETH`;
 };
 
-// Give simple investment advice based on budget
+/**
+ * Provide investment advice based on user budget
+ */
 export const getInvestmentAdvice = (budget: number): string => {
   if (budget < 1) {
-    return "With a budget under 1 ETH, explore new collections or secondary traits from larger collections. Focus on utility and roadmap.";
+    return "With a budget under 1 ETH, explore new collections or secondary traits from bigger collections. Focus on utility and roadmap.";
   } else if (budget < 5) {
-    return "Budget 1-5 ETH is suitable for mid-tier collections like Pudgy Penguins or Doodles. Look for strong community and clear utility.";
+    return "Budget 1-5 ETH: Consider mid-tier collections like Pudgy Penguins or Doodles. Look for strong communities and clear utility.";
   } else if (budget < 20) {
-    return "Budget 5-20 ETH can target blue-chip collections like Azuki or Clone X. Pay attention to timing and market sentiment.";
+    return "Budget 5-20 ETH: You can target blue-chip collections like Azuki or Clone X. Pay attention to timing and market sentiment.";
   } else {
-    return "Budget above 20 ETH allows considering BAYC, CryptoPunks, or rare pieces from established collections. Diversify your portfolio.";
+    return "Budget above 20 ETH: Consider BAYC, CryptoPunks, or rare pieces from established collections. Diversify your portfolio.";
   }
+};
+
+// ----------------------
+// Re-export all helpers (optional for clarity)
+// ----------------------
+export {
+  getTopCollections,
+  getTrendingCollections,
+  getMarketSummary,
+  formatPrice,
+  formatVolume,
+  getInvestmentAdvice
 };
