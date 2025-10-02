@@ -115,3 +115,4 @@ ${nftContext}
 
 You can ask about marketplace features, wallet setup, NFT creation, collection analysis, or price trends.`;
 }
+
