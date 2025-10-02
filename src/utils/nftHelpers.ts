@@ -1,4 +1,5 @@
 // src/utils/nftHelpers.ts
+
 export interface NFTCollection {
   name: string;
   floorPrice: number;
@@ -14,30 +15,25 @@ export interface MarketSummary {
 }
 
 // Mock NFT collections
-export const mockNFTCollections: NFTCollection[] = [
+const mockNFTCollections: NFTCollection[] = [
   { name: "Bored Ape Yacht Club", floorPrice: 12.5, volume24h: 450, change24h: 5.2, description: "Iconic PFP collection with strong community" },
   { name: "CryptoPunks", floorPrice: 45.8, volume24h: 320, change24h: -2.1, description: "Original NFT collection, historical significance" },
   { name: "Azuki", floorPrice: 8.9, volume24h: 280, change24h: 12.3, description: "Anime-inspired art with roadmap focus" },
   { name: "Pudgy Penguins", floorPrice: 6.2, volume24h: 195, change24h: 8.7, description: "Cute penguin PFPs with expanding ecosystem" },
 ];
 
-// Top NFT collections by 24h volume
+// Named export helpers
 export function getTopCollections(limit: number = 5): NFTCollection[] {
-  return mockNFTCollections
-    .sort((a, b) => b.volume24h - a.volume24h)
-    .slice(0, limit);
+  return [...mockNFTCollections].sort((a, b) => b.volume24h - a.volume24h).slice(0, limit);
 }
 
-// Trending collections (positive 24h change)
 export function getTrendingCollections(): NFTCollection[] {
   return mockNFTCollections.filter(c => c.change24h > 0);
 }
 
-// Market summary
 export function getMarketSummary(): MarketSummary {
   const totalVolume = mockNFTCollections.reduce((sum, c) => sum + c.volume24h, 0);
   const avgChange = mockNFTCollections.reduce((sum, c) => sum + c.change24h, 0) / mockNFTCollections.length;
-
   return {
     totalVolume: totalVolume.toFixed(0),
     avgChange: avgChange.toFixed(1),
@@ -45,7 +41,6 @@ export function getMarketSummary(): MarketSummary {
   };
 }
 
-// Utility functions
 export function formatPrice(price: number): string {
   return `${price} ETH`;
 }
