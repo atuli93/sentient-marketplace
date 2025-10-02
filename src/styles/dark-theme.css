@@ -1,31 +1,31 @@
-/* Dark Theme for ROMA NFT Marketplace */
+/* Dark Theme for OpenSea-style NFT Marketplace */
 :root {
-  /* Dark theme colors */
-  --bg-primary: #0a0b0d;
-  --bg-secondary: #13141a;
-  --bg-card: #1a1d24;
-  --bg-hover: #252830;
+  /* Backgrounds */
+  --bg-primary: #0D1117;       /* Main background */
+  --bg-secondary: #161B22;     /* Section background */
+  --bg-card: #1E222A;          /* Card background */
+  --bg-hover: #2A2F36;         /* Hover state */
 
   /* Text colors */
-  --text-primary: #ffffff;
-  --text-secondary: #a0a3a8;
-  --text-muted: #6c7075;
+  --text-primary: #FFFFFF;     /* Main text */
+  --text-secondary: #C3C8D4;   /* Subtext */
+  --text-muted: #8B949E;       /* Muted labels */
 
   /* Accent colors */
-  --accent-primary: #4f46e5;
-  --accent-secondary: #7c3aed;
-  --accent-success: #10b981;
-  --accent-warning: #f59e0b;
-  --accent-error: #ef4444;
+  --accent-primary: #2081E2;   /* OpenSea blue */
+  --accent-secondary: #1868B7; /* Darker blue */
+  --accent-success: #00C896;
+  --accent-warning: #FBBF24;
+  --accent-error: #EF4444;
 
   /* Border colors */
-  --border-primary: #2d3037;
-  --border-secondary: #404040;
+  --border-primary: #30363D;
+  --border-secondary: #21262D;
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-accent: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-  --gradient-card: linear-gradient(135deg, rgba(26, 29, 36, 0.8) 0%, rgba(19, 20, 26, 0.9) 100%);
+  --gradient-primary: linear-gradient(135deg, #2081E2 0%, #1868B7 100%);
+  --gradient-accent: linear-gradient(135deg, #1868B7 0%, #2081E2 100%);
+  --gradient-card: linear-gradient(135deg, rgba(30, 34, 42, 0.8) 0%, rgba(22, 27, 34, 0.9) 100%);
 }
 
 /* Global dark theme */
