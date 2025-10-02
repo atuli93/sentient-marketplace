@@ -1,117 +1,88 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import './CryptoBar.css';
 
-export default function CryptoBar() {
-  const [ethPrice, setEthPrice] = useState('Loading...');
-  const [gasPrice, setGasPrice] = useState('Loading...');
-  const [showSupportInfo, setShowSupportInfo] = useState(false);
-  const [showThemeToggle, setShowThemeToggle] = useState(false);
-  const [showCollectorInfo, setShowCollectorInfo] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+interface CryptoData {
+  ethPrice: string;
+  gasPrice: string;
+  status: string;
+  theme: 'light' | 'dark';
+}
+
+const CryptoBar = () => {
+  const [ethPrice, setEthPrice] = useState<string>('Loading...');
+  const [gasPrice, setGasPrice] = useState<string>('Loading...');
+  const [status, setStatus] = useState<string>('Live');
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
-    const fetchPrices = async () => {
+    const fetchEthPrice = async () => {
       try {
-        const apiKey = import.meta.env.VITE_ETHERSCAN_API_KEY;
-        if (!apiKey) {
-          setEthPrice('No API key set');
-          setGasPrice('No API key set');
-          return;
-        }
-
-        // Fetch ETH price
-        const ethResponse = await fetch(
-          `https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${apiKey}`
+        const response = await fetch(
+          `https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${import.meta.env.VITE_ETHERSCAN_API_KEY}`
         );
-        const ethData = await ethResponse.json();
+        const data = await response.json();
 
-        if (ethData.status === '1' && ethData.result?.ethusd) {
-          setEthPrice(`ETH: $${parseFloat(ethData.result.ethusd).toFixed(2)}`);
+        if (data.status === '1') {
+          setEthPrice(`$${parseFloat(data.result.ethusd).toFixed(2)}`);
         } else {
           setEthPrice('Error fetching ETH price');
         }
+      } catch (error) {
+        setEthPrice('Error fetching ETH price');
+      }
+    };
 
-        // Fetch Gas price
-        const gasResponse = await fetch(
-          `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${apiKey}`
+    const fetchGasPrice = async () => {
+      try {
+        const response = await fetch(
+          `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${import.meta.env.VITE_ETHERSCAN_API_KEY}`
         );
-        const gasData = await gasResponse.json();
+        const data = await response.json();
 
-        if (gasData.status === '1' && gasData.result?.ProposeGasPrice) {
-          setGasPrice(`Gas: ${gasData.result.ProposeGasPrice} GWEI`);
+        if (data.status === '1') {
+          setGasPrice(`${data.result.ProposeGasPrice} GWEI`);
         } else {
           setGasPrice('Error fetching gas price');
         }
       } catch (error) {
-        setEthPrice('Failed to load');
-        setGasPrice('Failed to load');
-        console.error('Error fetching prices:', error);
+        setGasPrice('Error fetching gas price');
       }
     };
 
-    fetchPrices();
-    const interval = setInterval(fetchPrices, 60000); // Refresh every 60s
+    fetchEthPrice();
+    fetchGasPrice();
+
+    const interval = setInterval(() => {
+      fetchEthPrice();
+      fetchGasPrice();
+    }, 60000); // Refresh every 60 seconds
 
     return () => clearInterval(interval);
   }, []);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-    document.body.classList.toggle('light-theme');
-    document.body.classList.toggle('dark-theme');
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   return (
     <div className={`crypto-bar ${theme}`}>
-      <div className="prices">
-        <span>{ethPrice}</span> | <span>{gasPrice}</span> | <span>Status: Live</span>
+      <div className="crypto-info">
+        ETH: {ethPrice} | Gas Price: {gasPrice} | Status: {status}
       </div>
-
-      <div className="controls">
-        <button onClick={() => setShowSupportInfo((v) => !v)}>Support</button>
-        <button onClick={() => setShowThemeToggle((v) => !v)}>🌓 Theme</button>
-        <button onClick={() => setShowCollectorInfo((v) => !v)}>Collector</button>
-        <button onClick={() => alert('Crypto info coming soon!')}>Crypto</button>
+      <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+        🌓
+      </button>
+      <div className="support-info">
+        <strong>Support:</strong> Atul (your name - atulchief)
+        <br />
+        Twitter: <a href="https://x.com/Chief_atul" target="_blank" rel="noopener noreferrer">@Chief_atul</a>
+        <br />
+        GitHub: <a href="https://github.com/atuli93" target="_blank" rel="noopener noreferrer">atuli93</a>
+        <br />
+        Email: <a href="mailto:atul.chieff60@gmail.com">atul.chieff60@gmail.com</a>
       </div>
-
-      {showSupportInfo && (
-        <div className="info-popup support-info">
-          <h4>Support</h4>
-          <p><strong>Name:</strong> Atul your name - atulchief</p>
-          <p>
-            <strong>Twitter:</strong>{' '}
-            <a href="https://x.com/Chief_atul" target="_blank" rel="noopener noreferrer">
-              @Chief_atul
-            </a>
-          </p>
-          <p>
-            <strong>GitHub:</strong>{' '}
-            <a href="https://github.com/atuli93" target="_blank" rel="noopener noreferrer">
-              github.com/atuli93
-            </a>
-          </p>
-          <p>
-            <strong>Email:</strong>{' '}
-            <a href="mailto:atul.chieff60@gmail.com">atul.chieff60@gmail.com</a>
-          </p>
-        </div>
-      )}
-
-      {showThemeToggle && (
-        <div className="info-popup theme-toggle-info">
-          <h4>Theme Toggle</h4>
-          <p>Current theme: <strong>{theme}</strong></p>
-          <button onClick={toggleTheme}>
-            Switch to {theme === 'dark' ? 'light' : 'dark'} theme
-          </button>
-        </div>
-      )}
-
-      {showCollectorInfo && (
-        <div className="info-popup collector-info">
-          <h4>Collector</h4>
-          <p>This section could include info about NFTs or wallet collector stats.</p>
-        </div>
-      )}
     </div>
   );
-}
+};
+
+export default CryptoBar;
