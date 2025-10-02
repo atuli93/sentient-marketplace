@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './CryptoBar.css'; // Optional CSS
+import './CryptoBar.css';
 
 export default function CryptoBar() {
   const [ethPrice, setEthPrice] = useState('Loading...');
@@ -8,45 +8,44 @@ export default function CryptoBar() {
   useEffect(() => {
     const fetchPrices = async () => {
       try {
-        // ✅ ETH price from CoinGecko
-        const ethResponse = await fetch(
+        // ETH price from CoinGecko
+        const ethRes = await fetch(
           'https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd'
         );
-        const ethData = await ethResponse.json();
+        const ethData = await ethRes.json();
 
         if (ethData?.ethereum?.usd) {
           setEthPrice(`ETH: $${ethData.ethereum.usd.toFixed(2)}`);
         } else {
-          setEthPrice('Error fetching ETH price');
+          setEthPrice('ETH price error');
         }
 
-        // ✅ Gas price from Etherscan (V1 gas endpoint still works)
+        // Gas price from Etherscan
         const apiKey = import.meta.env.VITE_ETHERSCAN_API_KEY;
         if (!apiKey) {
-          setGasPrice('No API key set');
+          setGasPrice('No API key');
           return;
         }
 
-        const gasResponse = await fetch(
+        const gasRes = await fetch(
           `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${apiKey}`
         );
-        const gasData = await gasResponse.json();
+        const gasData = await gasRes.json();
 
         if (gasData.status === '1' && gasData.result?.ProposeGasPrice) {
           setGasPrice(`Gas: ${gasData.result.ProposeGasPrice} GWEI`);
         } else {
-          setGasPrice('Error fetching gas price');
+          setGasPrice('Gas price error');
         }
       } catch (err) {
-        console.error('Error fetching data:', err);
-        setEthPrice('Failed to load');
-        setGasPrice('Failed to load');
+        console.error('Fetch error:', err);
+        setEthPrice('Error');
+        setGasPrice('Error');
       }
     };
 
     fetchPrices();
-    const interval = setInterval(fetchPrices, 60000); // Update every 60 seconds
-
+    const interval = setInterval(fetchPrices, 60000);
     return () => clearInterval(interval);
   }, []);
 
