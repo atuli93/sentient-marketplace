@@ -1,12 +1,12 @@
-# 🪐 Meet Your Free Gemini AI Chatbot
+# Meet Your Free Gemini AI Chatbot
 
-Imagine having an **NFT assistant** right in your browser—powered by Google’s Gemini AI. And the best part? You don’t pay a dime. 💸✨
+Imagine having an **NFT assistant** right in your browser—powered by Google’s Gemini AI. And the best part? You don’t pay a dime.  
 
 Gemini AI’s **free tier** allows **15 requests per minute**, which is perfect for experimenting and learning.
 
 ---
 
-## 🔑 First, Grab Your Magic Key
+## First, Grab Your Magic Key
 
 Every AI needs a key to unlock its powers. Here’s how you get yours:
 
@@ -16,7 +16,7 @@ Every AI needs a key to unlock its powers. Here’s how you get yours:
 4. Pick a project, or create a new one if you don’t have one  
 5. Copy the key somewhere safe  
 
-> Think of this as your **chatbot’s personal password**. Keep it secret, keep it safe. 🗝️
+> Think of this as your **chatbot’s personal password**. Keep it secret, keep it safe.  
 
 ---
 
@@ -54,3 +54,4 @@ npm run dev
 ## You’re All Set!
 **Your NFT AI assistant is ready to go.**
 **Type your questions, explore the market, and have fun experimenting. 🤖**
+
