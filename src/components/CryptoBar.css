@@ -1,11 +1,41 @@
-.crypto-bar {
+.crypto-bar-full {
   position: fixed;
   bottom: 0;
-  width: 100%;
+  left: 0;
+  right: 0;
   background-color: #111;
   color: #fff;
-  padding: 8px;
-  text-align: center;
-  font-size: 14px;
-  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 13px;
+  z-index: 9999;
+  font-family: sans-serif;
+}
+
+.crypto-bar-full .left,
+.crypto-bar-full .right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background-color: limegreen;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.live-text {
+  margin-right: 8px;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
 }
