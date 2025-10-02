@@ -7,7 +7,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import Layout from './layout/Layout';
 import AppRoutes from './routes';
 import Chatbot from './components/ui/Chatbot';
-import CryptoBar from './components/CryptoBar';  // <---- Import CryptoBar here
+import CryptoBar from './components/CryptoBar';
 import './App.css';
 import '@rainbow-me/rainbowkit/styles.css';
 
@@ -30,7 +30,7 @@ function App() {
               <Layout>
                 <AppRoutes />
                 <Chatbot />
-                <CryptoBar />  {/* <---- Add CryptoBar here */}
+                <CryptoBar />
               </Layout>
             </Router>
           </AuthProvider>
