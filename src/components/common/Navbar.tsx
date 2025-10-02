@@ -7,7 +7,7 @@ const Navbar = () => {
       <div className="navbar-inner">
         {/* Left: Logo */}
         <div className="navbar-left">
-          <img src="/sentient-logo-new.png" alt="ROMA Logo" className="logo" />
+          <img src="/assets/sentient-logo-new.png" alt="Sentient Logo" className="logo" />
         </div>
 
         {/* Center: Navigation Links */}
@@ -28,3 +28,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
