@@ -1,29 +1,24 @@
 import { useEffect, useState } from 'react';
 import './CryptoBar.css';
 
-interface CryptoData {
-  ethPrice: number | null;
-  gasPrice: number | null;
-  status: string;
-}
-
 const CryptoBar = () => {
-  const [cryptoData, setCryptoData] = useState<CryptoData>({
-    ethPrice: null,
-    gasPrice: null,
+  // Removed unused interface and unused setStatus state
+
+  // Only one state holding all data together
+  const [cryptoData, setCryptoData] = useState({
+    ethPrice: null as number | null,
+    gasPrice: null as number | null,
     status: 'Loading...',
   });
 
   useEffect(() => {
     async function fetchData() {
       try {
-        // Fetch ETH price from some API (replace URL with your actual API)
         const ethRes = await fetch(
           `https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${import.meta.env.VITE_ETHERSCAN_API_KEY}`
         );
         const ethData = await ethRes.json();
 
-        // Fetch Gas price (replace URL with your actual API or logic)
         const gasRes = await fetch(
           `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${import.meta.env.VITE_ETHERSCAN_API_KEY}`
         );
@@ -44,8 +39,6 @@ const CryptoBar = () => {
     }
 
     fetchData();
-
-    // Optionally refresh every 60 seconds
     const interval = setInterval(fetchData, 60000);
     return () => clearInterval(interval);
   }, []);
