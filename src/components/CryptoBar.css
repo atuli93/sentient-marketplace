@@ -3,34 +3,49 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #222;  /* dark background */
-  color: white;
-  padding: 10px 20px;
-  font-size: 14px;
+  background-color: #161b22;
+  border-top: 1px solid #30363d;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 12px 40px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #c9d1d9;
   z-index: 1000;
-  box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.6);
+  user-select: none;
 }
 
-/* Optional: support-section styling inside the bar */
-.crypto-bar .support-section {
-  display: flex;
-  gap: 15px;
-  font-size: 13px;
+.crypto-info {
+  font-weight: 500;
+  color: #58a6ff;
 }
 
-.crypto-bar a {
-  color: #8a2be2;
+.support-section {
+  text-align: right;
+  color: #8b949e;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.support-title {
+  font-weight: 700;
+  color: #f0f6fc;
+  margin-bottom: 4px;
+}
+
+.support-section a {
+  color: #58a6ff;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-.crypto-bar a:hover {
-  text-decoration: underline;
+.support-section a:hover {
+  color: #79c0ff;
 }
 
-/* To prevent content hiding behind the fixed bar, add padding-bottom to your main content container */
+/* Make sure page content doesn’t get hidden behind bar */
 body, #root {
-  padding-bottom: 50px; /* height of the crypto bar + some margin */
+  padding-bottom: 60px; /* same height as crypto-bar */
 }
