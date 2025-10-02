@@ -11,12 +11,13 @@ const CryptoBar: React.FC = () => {
   const [data, setData] = useState<CryptoData>({
     ethPrice: 'Loading...',
     gasPrice: 'Loading...',
-    status: 'Live',
+    status: 'Loading...',
   });
 
   useEffect(() => {
     async function fetchData() {
       try {
+        // Simulate API fetch - replace with real API calls
         const ethPrice = '$4476.26';
         const gasPrice = '45 GWEI';
         const status = 'Live';
@@ -32,8 +33,7 @@ const CryptoBar: React.FC = () => {
   return (
     <div className="crypto-bar">
       <div className="crypto-info">
-        <span>ETH: {data.ethPrice}</span>
-        <span>Gas: {data.gasPrice}</span>
+        ETH: {data.ethPrice} | Gas: {data.gasPrice} |{' '}
         <span className="status">
           Status: {data.status}
           {data.status === 'Live' && <span className="live-dot" />}
@@ -41,10 +41,24 @@ const CryptoBar: React.FC = () => {
       </div>
 
       <div className="support-section">
-        <a href="mailto:atul.chieff60@gmail.com" target="_blank" rel="noreferrer">Email</a>
-        <a href="https://x.com/Chief_atul" target="_blank" rel="noreferrer">Twitter</a>
-        <a href="https://github.com/atuli93" target="_blank" rel="noreferrer">GitHub</a>
-        <span>Name: Atul (atulchief)</span>
+        <div className="support-title">Support</div>
+        <div>Name: Atul (your name - atulchief)</div>
+        <div>
+          Twitter:{' '}
+          <a href="https://x.com/Chief_atul" target="_blank" rel="noreferrer">
+            @Chief_atul
+          </a>
+        </div>
+        <div>
+          GitHub:{' '}
+          <a href="https://github.com/atuli93" target="_blank" rel="noreferrer">
+            atuli93
+          </a>
+        </div>
+        <div>
+          Email:{' '}
+          <a href="mailto:atul.chieff60@gmail.com">atul.chieff60@gmail.com</a>
+        </div>
       </div>
     </div>
   );
