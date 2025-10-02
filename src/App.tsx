@@ -27,12 +27,12 @@ function App() {
         >
           <AuthProvider>
             <Router>
-              {/* ✅ Place CryptoBar above Layout so it always shows */}
-              <CryptoBar />
               <Layout>
                 <AppRoutes />
                 <Chatbot />
               </Layout>
+              {/* CryptoBar placed AFTER Layout, so it shows at bottom */}
+              <CryptoBar />
             </Router>
           </AuthProvider>
         </RainbowKitProvider>
