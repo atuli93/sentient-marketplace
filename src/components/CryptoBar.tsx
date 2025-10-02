@@ -1,15 +1,9 @@
 import { useEffect, useState } from 'react';
-import './CryptoBar.css';
 
-const CryptoBar = () => {
-  // Removed unused interface and unused setStatus state
-
-  // Only one state holding all data together
-  const [cryptoData, setCryptoData] = useState({
-    ethPrice: null as number | null,
-    gasPrice: null as number | null,
-    status: 'Loading...',
-  });
+export default function CryptoBar() {
+  const [ethPrice, setEthPrice] = useState('Loading...');
+  const [gasPrice, setGasPrice] = useState('Loading...');
+  const [status, setStatus] = useState('Loading...');
 
   useEffect(() => {
     async function fetchData() {
@@ -24,64 +18,67 @@ const CryptoBar = () => {
         );
         const gasData = await gasRes.json();
 
-        if (ethData.status === '1' && gasData.status === '1') {
-          setCryptoData({
-            ethPrice: parseFloat(ethData.result.ethusd),
-            gasPrice: parseFloat(gasData.result.ProposeGasPrice),
-            status: 'Live',
-          });
+        if (ethData.status === "1" && gasData.status === "1") {
+          setEthPrice(`$${parseFloat(ethData.result.ethusd).toFixed(2)}`);
+          setGasPrice(`${gasData.result.ProposeGasPrice} GWEI`);
+          setStatus('Live');
         } else {
-          setCryptoData((prev) => ({ ...prev, status: 'Error fetching data' }));
+          setStatus('Error fetching data');
         }
-      } catch (error) {
-        setCryptoData((prev) => ({ ...prev, status: 'Error fetching data' }));
+      } catch {
+        setStatus('Error fetching data');
       }
     }
-
     fetchData();
-    const interval = setInterval(fetchData, 60000);
-    return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="crypto-bar">
-      <div className="crypto-info">
-        ETH: {cryptoData.ethPrice ? `$${cryptoData.ethPrice.toFixed(2)}` : 'Loading...'} |{' '}
-        Gas: {cryptoData.gasPrice ? `${cryptoData.gasPrice} GWEI` : 'Loading...'} | Status: {cryptoData.status}
+    <div style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: '0.5rem 1rem',
+      backgroundColor: '#1a1a1a',
+      color: 'white',
+      fontFamily: 'monospace',
+      fontSize: '14px',
+      borderRadius: '5px',
+    }}>
+      <div>
+        ETH: {ethPrice} | Gas: {gasPrice} | Status: {status}
       </div>
 
-      <div className="support-section">
-        <h3>Support</h3>
-        <ul>
-          <li>
-            <a href="https://x.com/Chief_atul" target="_blank" rel="noopener noreferrer">
-              Twitter: @Chief_atul
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/atuli93" target="_blank" rel="noopener noreferrer">
-              GitHub: atuli93
-            </a>
-          </li>
-          <li>
-            Email:{' '}
-            <a href="mailto:atul.chieff60@gmail.com" target="_blank" rel="noopener noreferrer">
-              atul.chieff60@gmail.com
-            </a>
-          </li>
-          <li>Name: Atul (Your name - atulchief)</li>
-        </ul>
-      </div>
+      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+        <div>
+          Support:
+          <a href="https://x.com/Chief_atul" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.25rem', color: '#8a2be2' }}>
+            Twitter
+          </a> |
+          <a href="https://github.com/atuli93" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.25rem', color: '#8a2be2' }}>
+            GitHub
+          </a> |
+          <a href="mailto:atul.chieff60@gmail.com" style={{ marginLeft: '0.25rem', color: '#8a2be2' }}>
+            Email
+          </a>
+          <span style={{ marginLeft: '0.5rem' }}>Name: Atul (atulchief)</span>
+        </div>
 
-      <div className="extras">
-        <button className="theme-toggle" aria-label="Toggle theme">
+        <button
+          onClick={() => {
+            document.body.classList.toggle('dark');
+          }}
+          style={{
+            cursor: 'pointer',
+            background: 'none',
+            border: 'none',
+            color: 'white',
+            fontSize: '1.2rem',
+          }}
+          aria-label="Toggle dark mode"
+        >
           🌓
         </button>
-        <div className="collector">Collector</div>
-        <div className="info">Crypto and add some info also</div>
       </div>
     </div>
   );
-};
-
-export default CryptoBar;
+}
