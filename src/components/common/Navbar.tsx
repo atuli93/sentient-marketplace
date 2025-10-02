@@ -1,29 +1,22 @@
 import React from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import './Navbar.css'; // Uses your updated CSS
+import './Navbar.css';
 
 const Navbar = () => {
   return (
     <header className="navbar">
-      {/* Left: Search Bar */}
+      {/* Left: Logo */}
       <div className="navbar-left">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="Search NFTs, collections..."
-        />
+        <div className="logo">ROMA</div>
       </div>
 
-      {/* Center: Logo + Navigation */}
-      <div className="flex items-center gap-6">
-        <div className="logo">ROMA</div>
-        <nav className="flex gap-4">
-          <a href="/marketplace">Marketplace</a>
-          <a href="/create">Create</a>
-          <a href="/collections">Collections</a>
-          <a href="/profile">Profile</a>
-        </nav>
-      </div>
+      {/* Center: Navigation Links */}
+      <nav className="navbar-center">
+        <a href="/marketplace">Explore</a>
+        <a href="/collections">Collections</a>
+        <a href="/stats">Stats</a>
+        <a href="/create">Create</a>
+      </nav>
 
       {/* Right: Wallet Connect */}
       <div className="navbar-right">
