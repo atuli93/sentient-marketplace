@@ -22,7 +22,7 @@ const mockNFTCollections: NFTCollection[] = [
   { name: "Pudgy Penguins", floorPrice: 6.2, volume24h: 195, change24h: 8.7, description: "Cute penguin PFPs with expanding ecosystem" },
 ];
 
-// Named export helpers
+// Named exports — Rollup-friendly
 export function getTopCollections(limit: number = 5): NFTCollection[] {
   return [...mockNFTCollections].sort((a, b) => b.volume24h - a.volume24h).slice(0, limit);
 }
