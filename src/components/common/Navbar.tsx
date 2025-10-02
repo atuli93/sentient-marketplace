@@ -4,22 +4,24 @@ import './Navbar.css';
 const Navbar = () => {
   return (
     <header className="navbar">
-      {/* Left: Logo */}
-      <div className="navbar-left">
-        <div className="logo">ROMA</div>
-      </div>
+      <div className="navbar-inner">
+        {/* Left: Logo */}
+        <div className="navbar-left">
+          <img src="/sentient-logo-new.png" alt="ROMA Logo" className="logo" />
+        </div>
 
-      {/* Center: Navigation Links */}
-      <nav className="navbar-center">
-        <a href="/marketplace">Explore</a>
-        <a href="/collections">Collections</a>
-        <a href="/stats">Stats</a>
-        <a href="/create">Create</a>
-      </nav>
+        {/* Center: Navigation Links */}
+        <nav className="navbar-center">
+          <a href="/marketplace">Explore</a>
+          <a href="/collections">Collections</a>
+          <a href="/stats">Stats</a>
+          <a href="/create">Create</a>
+        </nav>
 
-      {/* Right: Wallet Connect */}
-      <div className="navbar-right">
-        <ConnectButton />
+        {/* Right: Wallet Connect */}
+        <div className="navbar-right">
+          <ConnectButton />
+        </div>
       </div>
     </header>
   );
