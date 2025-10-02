@@ -15,11 +15,10 @@ const CryptoBar: React.FC = () => {
   });
 
   useEffect(() => {
-    // Simulate fetching ETH price & gas info
     async function fetchData() {
       try {
-        // Replace these with your real APIs or hooks
-        const ethPrice = '$4476.26'; // e.g. fetched from API
+        // Replace these with real API calls as needed
+        const ethPrice = '$4476.26';
         const gasPrice = '45 GWEI';
         const status = 'Live';
 
@@ -38,26 +37,23 @@ const CryptoBar: React.FC = () => {
       </div>
 
       <div className="support-section">
-        <div><strong>Support</strong></div>
+        <div className="support-title">Support</div>
+        <div>Name: Atul (your name - atulchief)</div>
         <div>
-          Name: Atul (your name - atulchief)
-        </div>
-        <div>
-          Twitter: <a href="https://x.com/Chief_atul" target="_blank" rel="noreferrer">@Chief_atul</a>
-        </div>
-        <div>
-          GitHub: <a href="https://github.com/atuli93" target="_blank" rel="noreferrer">atuli93</a>
+          Twitter:{' '}
+          <a href="https://x.com/Chief_atul" target="_blank" rel="noreferrer">
+            @Chief_atul
+          </a>
         </div>
         <div>
-          Email: <a href="mailto:atul.chieff60@gmail.com">atul.chieff60@gmail.com</a>
+          GitHub:{' '}
+          <a href="https://github.com/atuli93" target="_blank" rel="noreferrer">
+            atuli93
+          </a>
         </div>
-
-        <div className="theme-toggle" title="Toggle Theme" role="button" tabIndex={0}>
-          🌓
-        </div>
-
-        <div className="collector-info">
-          Collector | Crypto and add some info also
+        <div>
+          Email:{' '}
+          <a href="mailto:atul.chieff60@gmail.com">atul.chieff60@gmail.com</a>
         </div>
       </div>
     </div>
