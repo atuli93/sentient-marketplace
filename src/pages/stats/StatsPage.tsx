@@ -35,32 +35,8 @@ const StatsPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="advanced-analytics">
-        <h2>Advanced Analytics</h2>
-        <p>Comprehensive insights for the marketplace.</p>
-
-        <div className="analytics-features">
-          <div className="feature-card">
-            <h3>📊 Volume Trends</h3>
-            <p>Track daily, weekly, and monthly trading volumes across all collections.</p>
-          </div>
-
-          <div className="feature-card">
-            <h3>🛒 Sales Insights</h3>
-            <p>Analyze top-selling NFTs, categories, and user activity in real-time.</p>
-          </div>
-
-          <div className="feature-card">
-            <h3>💰 Price Analytics</h3>
-            <p>Monitor average prices, price growth, and fluctuations for smarter trading.</p>
-          </div>
-
-          <div className="feature-card">
-            <h3>👥 User Engagement</h3>
-            <p>See active users, new registrations, and top collectors across the platform.</p>
-          </div>
+      <div className="coming-soon">
         </div>
-      </div>
     </div>
   );
 };
