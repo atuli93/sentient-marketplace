@@ -38,8 +38,8 @@ npm run dev
 ```
 2- Open [http://localhost:5175](http://localhost:5175)  
 3- Click the chat icon and start asking anything about NFTs!  
-**Try something fun, like:**
-ㅤㅤWhat’s trending in NFTs today?  
+**Try something fun, like:**  
+ㅤㅤWhat’s trending in NFTs today?   
 ㅤㅤI have 2 ETH. Which NFT should I buy?  
 ㅤㅤBAYC or Azuki—which is better?  
 ㅤㅤHelp me buy my first NFT!  
@@ -54,4 +54,5 @@ npm run dev
 ## You’re All Set!
 **Your NFT AI assistant is ready to go.**
 **Type your questions, explore the market, and have fun experimenting. 🤖**
+
 
