@@ -1,88 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Crypto Header Bar</title>
-  <style>
-    body { margin: 0; font-family: Arial, sans-serif; }
-    .crypto-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-      background-color: #111;
-      color: #fff;
-      font-size: 14px;
-    }
-    .left, .right {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .live-dot {
-      height: 10px;
-      width: 10px;
-      background-color: #00ff00;
-      border-radius: 50%;
-      display: inline-block;
-    }
-    .theme-toggle {
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
+import { useEffect, useState } from 'react';
+import './CryptoBar.css'; // Optional CSS
 
-<div class="crypto-bar">
-  <div class="left">
-    <span class="live-dot"></span> Live
-    <span id="eth-price">ETH: Loading...</span>
-    <span id="gas-price">Gas: Loading...</span>
-    <a href="#">Networks</a>
-    <a href="#">Terms of Service</a>
-    <a href="#">Privacy Policy</a>
-  </div>
-  <div class="right">
-    <a href="#">Support</a>
-    <span class="theme-toggle" onclick="toggleTheme()">🌓</span>
-    <button>Collector</button>
-    <button><strong>Crypto</strong></button>
-    <select>
-      <option>USD</option>
-      <option>EUR</option>
-      <option>BTC</option>
-    </select>
-  </div>
-</div>
+export default function CryptoBar() {
+  const [ethPrice, setEthPrice] = useState('Loading...');
+  const [gasPrice, setGasPrice] = useState('Loading...');
 
-<script>
-  async function fetchPrices() {
-    try {
-      // ETH price
-      const ethRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
-      const ethData = await ethRes.json();
-      document.getElementById('eth-price').textContent = `ETH: $${ethData.ethereum.usd.toFixed(2)}`;
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        // ✅ ETH price from CoinGecko
+        const ethResponse = await fetch(
+          'https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd'
+        );
+        const ethData = await ethResponse.json();
 
-      // Gas price
-      const gasRes = await fetch('https://etherscan.io/myapikey_logs?apikey=BHU9C9IUHV1QVEX67V2D3JW49VRDMTTDMD');
-      const gasData = await gasRes.json();
-      document.getElementById('gas-price').textContent = `Gas: ${gasData.result.SafeGasPrice} GWEI`;
-    } catch (e) {
-      console.error("Error fetching prices", e);
-    }
-  }
+        if (ethData?.ethereum?.usd) {
+          setEthPrice(`ETH: $${ethData.ethereum.usd.toFixed(2)}`);
+        } else {
+          setEthPrice('Error fetching ETH price');
+        }
 
-  fetchPrices();
-  setInterval(fetchPrices, 30000); // Refresh every 30s
+        // ✅ Gas price from Etherscan (V1 gas endpoint still works)
+        const apiKey = import.meta.env.VITE_ETHERSCAN_API_KEY;
+        if (!apiKey) {
+          setGasPrice('No API key set');
+          return;
+        }
 
-  function toggleTheme() {
-    const body = document.body;
-    const bar = document.querySelector('.crypto-bar');
-    const isDark = body.classList.toggle('light-mode');
-    bar.style.backgroundColor = isDark ? '#eee' : '#111';
-    bar.style.color = isDark ? '#111' : '#fff';
-  }
-</script>
+        const gasResponse = await fetch(
+          `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${apiKey}`
+        );
+        const gasData = await gasResponse.json();
 
-</body>
-</html>
+        if (gasData.status === '1' && gasData.result?.ProposeGasPrice) {
+          setGasPrice(`Gas: ${gasData.result.ProposeGasPrice} GWEI`);
+        } else {
+          setGasPrice('Error fetching gas price');
+        }
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        setEthPrice('Failed to load');
+        setGasPrice('Failed to load');
+      }
+    };
+
+    fetchPrices();
+    const interval = setInterval(fetchPrices, 60000); // Update every 60 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="crypto-bar">
+      {ethPrice} | {gasPrice}
+    </div>
+  );
+}
