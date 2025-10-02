@@ -2,138 +2,103 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { getTopCollections, getTrendingCollections, getMarketSummary } from '../../utils/nftHelpers';
 import { mockNFTs } from '../../data/mock/mockNFTs';
 
-// Gemini API - Free tier với 15 requests/minute
-const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || '');
+// Initialize Gemini AI client (Free tier: 15 requests/min)
+const gemini = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || '');
 
-export const sendMessageToGemini = async (message: string): Promise<string> => {
-  console.log('🔧 Debug: Starting Gemini request with:', message);
-  console.log('🔧 Debug: Gemini API Key exists:', !!import.meta.env.VITE_GEMINI_API_KEY);
+export const sendMessageToGemini = async (userMessage: string): Promise<string> => {
+  console.log('🔧 Debug: Sending message to Gemini:', userMessage);
+
+  if (!import.meta.env.VITE_GEMINI_API_KEY) {
+    return '🔑 Gemini API key is missing. Add VITE_GEMINI_API_KEY to your .env file.';
+  }
 
   try {
-    if (!import.meta.env.VITE_GEMINI_API_KEY) {
-      return '🔑 Chưa cấu hình Gemini API key. Vui lòng thêm VITE_GEMINI_API_KEY vào file .env';
-    }
-
-    // Get current NFT market data for context
+    // Fetch NFT market data
     const topCollections = getTopCollections(3);
     const trendingCollections = getTrendingCollections();
     const marketSummary = getMarketSummary();
 
-    // Create detailed NFT collections context
-    const collectionsData = mockNFTs.map(nft => ({
-      name: nft.name,
-      collection: nft.collection.name,
-      price: nft.price,
-      floorPrice: nft.collection.floorPrice,
-      rarity: nft.rarity,
-      creator: nft.creator.name,
-      description: nft.description,
-      likes: nft.likes,
-      views: nft.views,
-      lastSale: nft.lastSale,
-      hasAuction: !!nft.auction
-    }));
+    // Build NFT context from mock data
+    const nftContext = mockNFTs.map((nft, idx) => `
+${idx + 1}. ${nft.name} (${nft.collection.name})
+   💰 Price: ${nft.price} ETH | Floor: ${nft.collection.floorPrice} ETH
+   ⭐ Rarity: ${nft.rarity} | 👤 Creator: ${nft.creator.name}
+   📈 Last Sale: ${nft.lastSale} ETH | ${nft.auction ? '🔨 On Auction' : ''}
+   👁️ ${nft.views} views | ❤️ ${nft.likes} likes
+`).join('\n');
 
-    const nftContext = `
-📊 DỮ LIỆU THỊ TRƯỜNG NFT TRÊN ROMA MARKETPLACE:
-
-🏆 TOP COLLECTIONS CÓ SẴN (${mockNFTs.length} NFTs):
-${collectionsData.map((nft, i) => `
-${i + 1}. ${nft.name} (${nft.collection})
-   💰 Giá: ${nft.price} ETH | Floor: ${nft.floorPrice} ETH
-   ⭐ Rarity: ${nft.rarity} | 👤 Creator: ${nft.creator}
-   📈 Last Sale: ${nft.lastSale} ETH | ${nft.hasAuction ? '🔨 Đang Auction' : ''}
-   👁️ ${nft.views} views | ❤️ ${nft.likes} likes`).join('\n')}
-
-📈 TỔNG QUAN:
-- Top by Volume: ${topCollections.map(c => c.name).join(', ')}
-- Trending: ${trendingCollections.map(c => c.name).join(', ')}
+    const marketSummaryText = `
+📊 NFT MARKET SUMMARY:
+- Top Collections: ${topCollections.map(c => c.name).join(', ')}
+- Trending Collections: ${trendingCollections.map(c => c.name).join(', ')}
 - Total Volume: ${marketSummary.totalVolume} ETH
-- Avg Change: ${marketSummary.avgChange}%
+- Average Change: ${marketSummary.avgChange}%
 `;
 
-    const systemPrompt = `You are ROMA AI, the intelligent assistant of ROMA NFT Marketplace.
+    // Compose system prompt
+    const systemPrompt = `
+You are ROMA AI, the smart assistant for ROMA NFT Marketplace.
 
-🌟 ABOUT ROMA MARKETPLACE:
-ROMA is a modern NFT marketplace platform with comprehensive features:
+🌟 About ROMA Marketplace:
+• Explore Marketplace: Discover 15+ exclusive NFT collections
+• Collections: Browse hottest collections with real-time stats
+• Stats & Analytics: Market insights with interactive charts
+• Create NFT: Mint your own NFTs
+• Profile: Manage portfolio and collected NFTs
+• AI Chatbot: 24/7 NFT guidance
 
-🎨 MAIN FEATURES:
-• **Explore Marketplace** - Discover 15+ exclusive NFT collections
-• **Collections** - Browse overview of the hottest collections
-• **Stats & Analytics** - Real-time market analysis with interactive charts
-• **Create NFT** - Mint your own NFTs directly on the platform
-• **Profile** - Manage portfolio, view collected NFTs
-• **AI Chatbot** - 24/7 consultation about NFTs and market trends
+💎 Featured Collections:
+BAYC, Azuki, Pudgy Penguins, CryptoPunks, Doodles, Moonbirds, CloneX, DeGods, Mutant Ape, Meebits, VeeFriends, Cool Cats, World of Women, and more.
 
-🔐 TECHNOLOGY:
-• Secure wallet connection with RainbowKit (MetaMask, WalletConnect)
-• Signature verification - Authenticate wallet ownership
-• Smart contracts on Ethereum & Sepolia testnet
-• Wagmi + Viem for blockchain interactions
+🎯 Your Role:
+- Introduce ROMA Marketplace features
+- Guide users on platform usage
+- Analyze and compare available NFT collections
+- Provide investment advice
+- Explain wallet connection, NFT minting, signature verification
+- Answer questions about prices, rarity, floor price, volume
 
-💎 NFT COLLECTIONS (15+ items):
-ROMA features collections: BAYC, Azuki, Pudgy Penguins, CryptoPunks, Doodles, Moonbirds, CloneX, DeGods, Mutant Ape, Meebits, VeeFriends, Cool Cats, World of Women, and more.
-
-🎯 YOUR ROLE:
-✅ Introduce ROMA Marketplace features
-✅ Guide users on platform usage
-✅ Analyze and compare 15+ NFT collections
-✅ Provide investment advice suitable for user budgets
-✅ Explain wallet connection, NFT minting, signature verification
-✅ Answer questions about prices, rarity, floor price, volume
-
-⚠️ IMPORTANT NOTES:
-- If asked about features → Explain each feature in detail
-- If asked about NFTs → ONLY discuss the 15+ available collections
-- If asked about unavailable NFTs → Say "Not available on ROMA, but we have 15+ other collections"
-
-📝 RESPONSE STYLE:
-- Clear, concise, and helpful in English
-- Use appropriate emojis for better readability
-- Provide specific data and numbers
-- Give step-by-step guidance when needed
-- Structure responses with proper formatting and line breaks
+📝 Response Style:
+- Clear, helpful, concise English
+- Use emojis for readability
+- Include numbers and specific data
+- Step-by-step guidance if needed
 
 ${nftContext}
+${marketSummaryText}
 
-Please respond based on ROMA Marketplace information and the NFT data above!`;
+User Question: ${userMessage}
+`;
 
-    const fullPrompt = `${systemPrompt}\n\n❓ User Question: ${message}`;
+    console.log('🔧 Debug: Generating response from Gemini...');
 
-    console.log('🔧 Debug: Making Gemini request...');
-
-    // Use the available model
-    const model = genAI.getGenerativeModel({ model: "models/gemini-pro" });
-    const result = await model.generateContent(fullPrompt);
+    // Send request to Gemini model
+    const model = gemini.getGenerativeModel({ model: 'models/gemini-pro' });
+    const result = await model.generateContent(systemPrompt);
     const response = await result.response;
-    const text = response.text();
+    const answer = response.text();
 
-    console.log('🔧 Debug: Gemini response received:', text);
+    console.log('🔧 Debug: Gemini response received:', answer);
 
-    return text || 'Xin lỗi, tôi không thể xử lý yêu cầu của bạn lúc này.';
+    return answer || "Sorry, I couldn't process your request at the moment.";
 
   } catch (error: any) {
-    console.error('❌ Gemini Error Details:', {
-      message: error.message,
-      status: error.status,
-      code: error.code,
-      fullError: error
-    });
+    console.error('❌ Gemini Error:', error);
 
-    // Handle specific Gemini errors
+    // Handle specific errors
     if (error.message?.includes('API_KEY_INVALID')) {
-      return '🔑 API key không hợp lệ. Vui lòng kiểm tra Gemini API key.';
+      return '🔑 Invalid Gemini API key.';
     }
     if (error.message?.includes('QUOTA_EXCEEDED')) {
-      return '📊 Đã vượt quá quota API. Vui lòng đợi một chút rồi thử lại.';
+      return '📊 API quota exceeded. Try again later.';
     }
     if (error.message?.includes('RATE_LIMIT_EXCEEDED')) {
-      return '⏰ Quá nhiều requests. Vui lòng đợi 1 phút rồi thử lại.';
+      return '⏰ Too many requests. Wait a minute before retrying.';
     }
     if (error.message?.includes('not found') || error.message?.includes('404')) {
-      return '🔧 Model không tồn tại. Đang thử model khác... Refresh trang và thử lại.';
+      return '🔧 Model not found. Refresh and try again.';
     }
 
-    return `❌ Lỗi: ${error.message || 'Không thể kết nối với AI'}`;
+    return `❌ Error: ${error.message || 'Unable to connect to Gemini AI'}`;
   }
 };
