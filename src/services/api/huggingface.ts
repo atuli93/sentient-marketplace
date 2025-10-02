@@ -16,13 +16,13 @@ export const sendMessageToHuggingFace = async (message: string): Promise<string>
     const marketSummary = getMarketSummary();
 
     const nftContext = `
-Dữ liệu thị trường NFT hiện tại:
-Top Collections theo Volume:
-${topCollections.map(c => `- ${c.name}: ${c.floorPrice} ETH floor, ${c.volume24h} ETH volume, ${c.change24h}% thay đổi`).join('\n')}
+Current NFT Market Data:
+Top Collections by 24h Volume:
+${topCollections.map(c => `- ${c.name}: ${c.floorPrice} ETH floor, ${c.volume24h} ETH volume, ${c.change24h}% change`).join('\n')}
 
-Tổng quan thị trường: ${marketSummary.totalVolume} ETH tổng volume, ${marketSummary.avgChange}% thay đổi trung bình
+Market Summary: ${marketSummary.totalVolume} ETH total volume, ${marketSummary.avgChange}% average change
 
-Trending: ${trendingCollections.map(c => c.name).join(', ')}
+Trending Collections: ${trendingCollections.map(c => c.name).join(', ')}
 `;
 
     const systemPrompt = `You are ROMA, a professional NFT & Web3 AI assistant. You are an expert in NFTs, blockchain technology, cryptocurrency markets, and digital art.
@@ -92,19 +92,26 @@ ROMA's response:`;
     console.error('❌ Hugging Face Error Details:', error);
 
     if (error.message?.includes('Authorization')) {
-      return '🔑 API key không hợp lệ. HF không cần API key để dùng free!';
+      return '🔑 Invalid API key. HF free tier works without a key!';
     }
     if (error.message?.includes('rate limit') || error.message?.includes('429')) {
-      return '⏰ Quá nhiều requests. Vui lòng đợi 1 phút rồi thử lại.';
+      return '⏰ Too many requests. Please wait 1 minute and try again.';
     }
     if (error.message?.includes('model') && error.message?.includes('not found')) {
-      return '🔧 Model đang bận. Đang thử model khác...';
+      return '🔧 Model busy. Trying another model...';
     }
 
     return generateFallbackResponse(message, '');
   }
 };
 
-function generateFallbackResponse(message: string, _nftContext: string): string {
-  return `🤖 ROMA Assistant Fallback: Unable to get live response for "${message}". Please try again later or explore marketplace features manually.`;
+// Fallback response for unavailable HF API or small responses
+function generateFallbackResponse(message: string, nftContext: string): string {
+  return `🤖 **ROMA AI Fallback Response**:
+
+I cannot provide a live AI answer right now. However, here is some context from the current NFT market:
+
+${nftContext}
+
+You can ask about marketplace features, wallet setup, NFT creation, collection analysis, or price trends.`;
 }
