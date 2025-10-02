@@ -7,7 +7,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import Layout from './layout/Layout';
 import AppRoutes from './routes';
 import Chatbot from './components/ui/Chatbot';
-import CryptoBar from './components/CryptoBar';
+import CryptoBar from './components/CryptoBar'; // ✅ CryptoBar import
 import './App.css';
 import '@rainbow-me/rainbowkit/styles.css';
 
@@ -27,10 +27,11 @@ function App() {
         >
           <AuthProvider>
             <Router>
+              {/* ✅ Place CryptoBar above Layout so it always shows */}
+              <CryptoBar />
               <Layout>
                 <AppRoutes />
                 <Chatbot />
-                <CryptoBar />
               </Layout>
             </Router>
           </AuthProvider>
