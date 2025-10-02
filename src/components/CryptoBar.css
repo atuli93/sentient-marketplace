@@ -1,54 +1,54 @@
 .crypto-bar {
-  background-color: #222;
+  background-color: #1a1a1a;
   color: white;
-  padding: 10px 15px;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
+  padding: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
-.crypto-bar.light {
-  background-color: #f0f0f0;
-  color: #222;
-}
-
-.crypto-bar .prices {
+.crypto-info {
   font-weight: bold;
 }
 
-.crypto-bar .controls button {
-  margin-right: 10px;
-  background: #8a2be2;
-  border: none;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
+.support-section ul {
+  list-style: none;
+  padding: 0;
 }
 
-.crypto-bar .controls button:hover {
-  background: #6b22b1;
+.support-section li {
+  margin-bottom: 5px;
 }
 
-.info-popup {
-  background: rgba(0, 0, 0, 0.85);
-  padding: 10px;
-  border-radius: 6px;
-  max-width: 300px;
-}
-
-.crypto-bar.light .info-popup {
-  background: #ddd;
-  color: #222;
-}
-
-.info-popup a {
+.support-section a {
   color: #8a2be2;
+  text-decoration: none;
+}
+
+.support-section a:hover {
   text-decoration: underline;
 }
 
-.info-popup h4 {
-  margin-top: 0;
+.extras {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+}
+
+.collector {
+  font-weight: 600;
+}
+
+.info {
+  font-style: italic;
+  font-size: 14px;
 }
