@@ -5,8 +5,12 @@ import { getTopCollections, getTrendingCollections, getMarketSummary } from '../
 // Initialize Hugging Face API (free tier works without key)
 const hf = new HfInference(import.meta.env.VITE_HF_API_KEY || '');
 
-export const sendMessageToHuggingFace = async (message: string): Promise<string> => {
-  console.log('🔧 Debug: Starting Hugging Face request with:', message);
+/**
+ * Send a user message to Hugging Face and get an AI response
+ * @param _message - The user's message
+ */
+export const sendMessageToHuggingFace = async (_message: string): Promise<string> => {
+  console.log('🔧 Debug: Starting Hugging Face request with:', _message);
   console.log('🔧 Debug: HF API Key exists:', !!import.meta.env.VITE_HF_API_KEY);
 
   try {
@@ -29,7 +33,7 @@ Trending Collections: ${trendingCollections.map(c => c.name).join(', ')}
 
 ${nftContext}
 
-User question: ${message}
+User question: ${_message}
 
 ROMA's response:`;
 
@@ -63,7 +67,7 @@ ROMA's response:`;
       console.warn('Model 1 failed, trying model 2...');
       response = await hf.textGeneration({
         model: models[1],
-        inputs: `User: ${message}\nROMA (NFT Expert):`,
+        inputs: `User: ${_message}\nROMA (NFT Expert):`,
         parameters: {
           max_new_tokens: 300,
           temperature: 0.8,
@@ -82,8 +86,9 @@ ROMA's response:`;
 
     console.log('🔧 Debug: HF response received:', text);
 
+    // Fallback if response is too short
     if (!text || text.length < 10) {
-      return generateFallbackResponse(message, nftContext);
+      return generateFallbackResponse(_message, nftContext);
     }
 
     return text;
@@ -101,12 +106,16 @@ ROMA's response:`;
       return '🔧 Model busy. Trying another model...';
     }
 
-    return generateFallbackResponse(message, '');
+    return generateFallbackResponse(_message, '');
   }
 };
 
-// Fallback response for unavailable HF API or small responses
-function generateFallbackResponse(message: string, nftContext: string): string {
+/**
+ * Fallback response for unavailable HF API or small responses
+ * @param _message - Original user message
+ * @param nftContext - Current NFT market context
+ */
+function generateFallbackResponse(_message: string, nftContext: string): string {
   return `🤖 **ROMA AI Fallback Response**:
 
 I cannot provide a live AI answer right now. However, here is some context from the current NFT market:
@@ -115,4 +124,3 @@ ${nftContext}
 
 You can ask about marketplace features, wallet setup, NFT creation, collection analysis, or price trends.`;
 }
-
