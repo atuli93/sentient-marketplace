@@ -1,84 +1,43 @@
-import { useEffect, useState } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { WagmiProvider } from 'wagmi';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
+import { config as wagmiConfig } from './config/wagmi';
+import { AuthProvider } from './contexts/AuthContext';
+import Layout from './layout/Layout';
+import AppRoutes from './routes';
+import Chatbot from './components/ui/Chatbot';
+import CryptoBar from './components/CryptoBar';  // <---- Import CryptoBar here
+import './App.css';
+import '@rainbow-me/rainbowkit/styles.css';
 
-export default function CryptoBar() {
-  const [ethPrice, setEthPrice] = useState('Loading...');
-  const [gasPrice, setGasPrice] = useState('Loading...');
-  const [status, setStatus] = useState('Loading...');
+const queryClient = new QueryClient();
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const ethRes = await fetch(
-          `https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${import.meta.env.VITE_ETHERSCAN_API_KEY}`
-        );
-        const ethData = await ethRes.json();
-
-        const gasRes = await fetch(
-          `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${import.meta.env.VITE_ETHERSCAN_API_KEY}`
-        );
-        const gasData = await gasRes.json();
-
-        if (ethData.status === "1" && gasData.status === "1") {
-          setEthPrice(`$${parseFloat(ethData.result.ethusd).toFixed(2)}`);
-          setGasPrice(`${gasData.result.ProposeGasPrice} GWEI`);
-          setStatus('Live');
-        } else {
-          setStatus('Error fetching data');
-        }
-      } catch {
-        setStatus('Error fetching data');
-      }
-    }
-    fetchData();
-  }, []);
-
+function App() {
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '0.5rem 1rem',
-      backgroundColor: '#1a1a1a',
-      color: 'white',
-      fontFamily: 'monospace',
-      fontSize: '14px',
-      borderRadius: '5px',
-    }}>
-      <div>
-        ETH: {ethPrice} | Gas: {gasPrice} | Status: {status}
-      </div>
-
-      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-        <div>
-          Support:
-          <a href="https://x.com/Chief_atul" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.25rem', color: '#8a2be2' }}>
-            Twitter
-          </a> |
-          <a href="https://github.com/atuli93" target="_blank" rel="noopener noreferrer" style={{ marginLeft: '0.25rem', color: '#8a2be2' }}>
-            GitHub
-          </a> |
-          <a href="mailto:atul.chieff60@gmail.com" style={{ marginLeft: '0.25rem', color: '#8a2be2' }}>
-            Email
-          </a>
-          <span style={{ marginLeft: '0.5rem' }}>Name: Atul (atulchief)</span>
-        </div>
-
-        <button
-          onClick={() => {
-            document.body.classList.toggle('dark');
-          }}
-          style={{
-            cursor: 'pointer',
-            background: 'none',
-            border: 'none',
-            color: 'white',
-            fontSize: '1.2rem',
-          }}
-          aria-label="Toggle dark mode"
+    <WagmiProvider config={wagmiConfig}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider
+          theme={darkTheme({
+            accentColor: '#8a2be2',
+            accentColorForeground: 'white',
+            borderRadius: 'medium',
+            fontStack: 'system',
+          })}
         >
-          🌓
-        </button>
-      </div>
-    </div>
+          <AuthProvider>
+            <Router>
+              <Layout>
+                <AppRoutes />
+                <Chatbot />
+                <CryptoBar />  {/* <---- Add CryptoBar here */}
+              </Layout>
+            </Router>
+          </AuthProvider>
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 }
+
+export default App;
