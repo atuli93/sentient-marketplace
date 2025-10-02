@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function CryptoBar() {
   const [ethPrice, setEthPrice] = useState('Loading...');
@@ -7,88 +7,69 @@ export default function CryptoBar() {
   useEffect(() => {
     const fetchPrices = async () => {
       try {
-        const ethRes = await fetch(
-          'https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd'
-        );
-        const ethData = await ethRes.json();
-        setEthPrice(`$${ethData.ethereum.usd.toFixed(2)}`);
+        const apiKey = import.meta.env.VITE_ETHERSCAN_API_KEY;
+        if (!apiKey) {
+          setEthPrice('No API key set');
+          setGasPrice('No API key set');
+          return;
+        }
 
-        const gasRes = await fetch(
-          `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${import.meta.env.VITE_ETHERSCAN_API_KEY}`
+        // Fetch ETH price in USD
+        const ethResponse = await fetch(
+          `https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${apiKey}`
         );
-        const gasData = await gasRes.json();
-        setGasPrice(`${gasData.result.SafeGasPrice} GWEI`);
+        const ethData = await ethResponse.json();
+
+        if (ethData.status === '1' && ethData.result?.ethusd) {
+          setEthPrice(`ETH: $${parseFloat(ethData.result.ethusd).toFixed(2)}`);
+        } else {
+          setEthPrice('Error fetching ETH price');
+        }
+
+        // Fetch gas price in Gwei
+        const gasResponse = await fetch(
+          `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${apiKey}`
+        );
+        const gasData = await gasResponse.json();
+
+        if (gasData.status === '1' && gasData.result?.ProposeGasPrice) {
+          setGasPrice(`Gas: ${gasData.result.ProposeGasPrice} GWEI`);
+        } else if (gasData.status === '1' && gasData.result?.SafeGasPrice) {
+          setGasPrice(`Gas: ${gasData.result.SafeGasPrice} GWEI (safe)`);
+        } else {
+          setGasPrice('Error fetching gas price');
+        }
       } catch (error) {
-        console.error('Failed to fetch prices:', error);
-        setGasPrice('Unavailable');
+        setEthPrice('Failed to load');
+        setGasPrice('Failed to load');
+        console.error('Error fetching prices:', error);
       }
     };
 
     fetchPrices();
-    const interval = setInterval(fetchPrices, 30000);
+
+    const interval = setInterval(fetchPrices, 60000); // Refresh every 60 seconds
+
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div style={styles.bar}>
-      <div style={styles.left}>
-        <span style={styles.dot}></span> Live
-        <span>ETH: {ethPrice}</span>
-        <span>Gas: {gasPrice}</span>
-        <a href="#">Networks</a>
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-      </div>
-      <div style={styles.right}>
-        <a href="#">Support</a>
-        <span style={{ cursor: 'pointer' }} onClick={() => toggleTheme()}>🌓</span>
-        <button>Collector</button>
-        <button><strong>Crypto</strong></button>
-        <select>
-          <option>USD</option>
-          <option>EUR</option>
-          <option>BTC</option>
-        </select>
-      </div>
+    <div
+      style={{
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: '#111',
+        color: '#fff',
+        padding: '10px 20px',
+        fontSize: '14px',
+        textAlign: 'center',
+        zIndex: 9999,
+        fontFamily: 'system-ui, sans-serif',
+      }}
+    >
+      {ethPrice} | {gasPrice}
     </div>
   );
-}
-
-const styles: { [key: string]: React.CSSProperties } = {
-  bar: {
-    position: 'fixed',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: '#111',
-    color: '#fff',
-    padding: '10px 20px',
-    fontSize: '14px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    zIndex: 9999,
-  },
-  left: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '15px',
-  },
-  right: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '15px',
-  },
-  dot: {
-    width: '10px',
-    height: '10px',
-    backgroundColor: 'limegreen',
-    borderRadius: '50%',
-    display: 'inline-block',
-  },
-};
-
-function toggleTheme() {
-  const root = document.documentElement;
-  root.classList.toggle('light-mode');
 }
