@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function CryptoBar() {
   const [ethPrice, setEthPrice] = useState('Loading...');
@@ -14,7 +14,7 @@ export default function CryptoBar() {
           return;
         }
 
-        // Fetch ETH price in USD
+        // Fetch ETH price
         const ethResponse = await fetch(
           `https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${apiKey}`
         );
@@ -26,7 +26,7 @@ export default function CryptoBar() {
           setEthPrice('Error fetching ETH price');
         }
 
-        // Fetch gas price in Gwei
+        // Fetch gas price
         const gasResponse = await fetch(
           `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${apiKey}`
         );
@@ -47,8 +47,7 @@ export default function CryptoBar() {
     };
 
     fetchPrices();
-
-    const interval = setInterval(fetchPrices, 60000); // Refresh every 60 seconds
+    const interval = setInterval(fetchPrices, 60000); // every 60 seconds
 
     return () => clearInterval(interval);
   }, []);
