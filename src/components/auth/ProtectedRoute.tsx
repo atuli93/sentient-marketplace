@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import CryptoBar from '../CryptoBar';  // import CryptoBar here
 import './ProtectedRoute.css';
 
 interface ProtectedRouteProps {
@@ -39,7 +40,12 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     );
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <CryptoBar /> {/* Render CryptoBar here, visible only when authenticated */}
+    </>
+  );
 };
 
 export default ProtectedRoute;
