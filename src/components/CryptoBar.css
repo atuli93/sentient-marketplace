@@ -1,41 +1,54 @@
-.crypto-bar-full {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #111;
-  color: #fff;
+.crypto-bar {
+  background-color: #222;
+  color: white;
+  padding: 10px 15px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 16px;
-  font-size: 13px;
-  z-index: 9999;
-  font-family: sans-serif;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.crypto-bar-full .left,
-.crypto-bar-full .right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.crypto-bar.light {
+  background-color: #f0f0f0;
+  color: #222;
 }
 
-.live-dot {
-  width: 8px;
-  height: 8px;
-  background-color: limegreen;
-  border-radius: 50%;
-  display: inline-block;
+.crypto-bar .prices {
+  font-weight: bold;
 }
 
-.live-text {
-  margin-right: 8px;
-}
-
-.theme-toggle {
-  background: none;
+.crypto-bar .controls button {
+  margin-right: 10px;
+  background: #8a2be2;
   border: none;
-  color: inherit;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
   cursor: pointer;
+}
+
+.crypto-bar .controls button:hover {
+  background: #6b22b1;
+}
+
+.info-popup {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 10px;
+  border-radius: 6px;
+  max-width: 300px;
+}
+
+.crypto-bar.light .info-popup {
+  background: #ddd;
+  color: #222;
+}
+
+.info-popup a {
+  color: #8a2be2;
+  text-decoration: underline;
+}
+
+.info-popup h4 {
+  margin-top: 0;
 }
