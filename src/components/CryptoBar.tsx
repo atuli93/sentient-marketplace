@@ -2,84 +2,90 @@ import { useEffect, useState } from 'react';
 import './CryptoBar.css';
 
 interface CryptoData {
-  ethPrice: string;
-  gasPrice: string;
+  ethPrice: number | null;
+  gasPrice: number | null;
   status: string;
-  theme: 'light' | 'dark';
 }
 
 const CryptoBar = () => {
-  const [ethPrice, setEthPrice] = useState<string>('Loading...');
-  const [gasPrice, setGasPrice] = useState<string>('Loading...');
-  const [status, setStatus] = useState<string>('Live');
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [cryptoData, setCryptoData] = useState<CryptoData>({
+    ethPrice: null,
+    gasPrice: null,
+    status: 'Loading...',
+  });
 
   useEffect(() => {
-    const fetchEthPrice = async () => {
+    async function fetchData() {
       try {
-        const response = await fetch(
+        // Fetch ETH price from some API (replace URL with your actual API)
+        const ethRes = await fetch(
           `https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${import.meta.env.VITE_ETHERSCAN_API_KEY}`
         );
-        const data = await response.json();
+        const ethData = await ethRes.json();
 
-        if (data.status === '1') {
-          setEthPrice(`$${parseFloat(data.result.ethusd).toFixed(2)}`);
-        } else {
-          setEthPrice('Error fetching ETH price');
-        }
-      } catch (error) {
-        setEthPrice('Error fetching ETH price');
-      }
-    };
-
-    const fetchGasPrice = async () => {
-      try {
-        const response = await fetch(
+        // Fetch Gas price (replace URL with your actual API or logic)
+        const gasRes = await fetch(
           `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${import.meta.env.VITE_ETHERSCAN_API_KEY}`
         );
-        const data = await response.json();
+        const gasData = await gasRes.json();
 
-        if (data.status === '1') {
-          setGasPrice(`${data.result.ProposeGasPrice} GWEI`);
+        if (ethData.status === '1' && gasData.status === '1') {
+          setCryptoData({
+            ethPrice: parseFloat(ethData.result.ethusd),
+            gasPrice: parseFloat(gasData.result.ProposeGasPrice),
+            status: 'Live',
+          });
         } else {
-          setGasPrice('Error fetching gas price');
+          setCryptoData((prev) => ({ ...prev, status: 'Error fetching data' }));
         }
       } catch (error) {
-        setGasPrice('Error fetching gas price');
+        setCryptoData((prev) => ({ ...prev, status: 'Error fetching data' }));
       }
-    };
+    }
 
-    fetchEthPrice();
-    fetchGasPrice();
+    fetchData();
 
-    const interval = setInterval(() => {
-      fetchEthPrice();
-      fetchGasPrice();
-    }, 60000); // Refresh every 60 seconds
-
+    // Optionally refresh every 60 seconds
+    const interval = setInterval(fetchData, 60000);
     return () => clearInterval(interval);
   }, []);
 
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
-
   return (
-    <div className={`crypto-bar ${theme}`}>
+    <div className="crypto-bar">
       <div className="crypto-info">
-        ETH: {ethPrice} | Gas Price: {gasPrice} | Status: {status}
+        ETH: {cryptoData.ethPrice ? `$${cryptoData.ethPrice.toFixed(2)}` : 'Loading...'} |{' '}
+        Gas: {cryptoData.gasPrice ? `${cryptoData.gasPrice} GWEI` : 'Loading...'} | Status: {cryptoData.status}
       </div>
-      <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-        🌓
-      </button>
-      <div className="support-info">
-        <strong>Support:</strong> Atul (your name - atulchief)
-        <br />
-        Twitter: <a href="https://x.com/Chief_atul" target="_blank" rel="noopener noreferrer">@Chief_atul</a>
-        <br />
-        GitHub: <a href="https://github.com/atuli93" target="_blank" rel="noopener noreferrer">atuli93</a>
-        <br />
-        Email: <a href="mailto:atul.chieff60@gmail.com">atul.chieff60@gmail.com</a>
+
+      <div className="support-section">
+        <h3>Support</h3>
+        <ul>
+          <li>
+            <a href="https://x.com/Chief_atul" target="_blank" rel="noopener noreferrer">
+              Twitter: @Chief_atul
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/atuli93" target="_blank" rel="noopener noreferrer">
+              GitHub: atuli93
+            </a>
+          </li>
+          <li>
+            Email:{' '}
+            <a href="mailto:atul.chieff60@gmail.com" target="_blank" rel="noopener noreferrer">
+              atul.chieff60@gmail.com
+            </a>
+          </li>
+          <li>Name: Atul (Your name - atulchief)</li>
+        </ul>
+      </div>
+
+      <div className="extras">
+        <button className="theme-toggle" aria-label="Toggle theme">
+          🌓
+        </button>
+        <div className="collector">Collector</div>
+        <div className="info">Crypto and add some info also</div>
       </div>
     </div>
   );
