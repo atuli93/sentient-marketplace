@@ -41,6 +41,13 @@ const Navbar: React.FC = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"
           />
+          {searchQuery && (
+            <ul className="search-suggestions">
+              <li onClick={() => navigate(`/collections/${searchQuery}`)}>Go to Collection: {searchQuery}</li>
+              <li onClick={() => navigate(`/nft/${searchQuery}`)}>View NFT: {searchQuery}</li>
+              <li onClick={() => navigate(`/user/${searchQuery}`)}>Find Creator: {searchQuery}</li>
+            </ul>
+          )}
         </div>
 
         {/* Logo */}
