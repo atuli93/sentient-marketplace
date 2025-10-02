@@ -16,7 +16,7 @@ const CollectionsPage: React.FC = () => {
           </div>
           <div className="collection-info">
             <h3>Cosmic Wanderers</h3>
-            <p>Floor: 2.5 ETH • Volume: 1.2K ETH</p>
+            <p>Floor: 9.3 ETH • Volume: 7.4K ETH</p>
           </div>
         </div>
 
@@ -30,3 +30,4 @@ const CollectionsPage: React.FC = () => {
 };
 
 export default CollectionsPage;
+
