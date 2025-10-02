@@ -37,22 +37,24 @@ Pro tip: If you’re using Vite, ```.env.local``` works even better for privacy.
 npm run dev
 ```
 2- Open [http://localhost:5175](http://localhost:5175)  
-3- Click the chat icon and start asking anything about NFTs!  
+3- Click the chat icon and start asking anything about NFTs!   
+
 **Try something fun, like:**  
 ㅤㅤWhat’s trending in NFTs today?   
 ㅤㅤI have 2 ETH. Which NFT should I buy?  
 ㅤㅤBAYC or Azuki—which is better?  
 ㅤㅤHelp me buy my first NFT!  
 
-## Why Gemini Rocks
+## Why Gemini Rocks  
 
-• Completely FREE — no credit card needed
-• 15 requests per minute — plenty for testing
-• Supports Vietnamese — talk to it naturally
-• NFT & crypto aware — it “gets” your context
+• Completely FREE — no credit card needed  
+• 15 requests per minute — plenty for testing  
+• Supports Vietnamese — talk to it naturally  
+• NFT & crypto aware — it “gets” your context  
 
-## You’re All Set!
-**Your NFT AI assistant is ready to go.**
-**Type your questions, explore the market, and have fun experimenting. 🤖**
+## You’re All Set!  
+**Your NFT AI assistant is ready to go.**  
+**Type your questions, explore the market, and have fun experimenting. 🤖**  
+
 
 
