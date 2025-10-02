@@ -1,79 +1,117 @@
-import { useEffect, useState } from 'react';
-import './CryptoBar.css';
+import React, { useEffect, useState } from 'react';
 
 export default function CryptoBar() {
   const [ethPrice, setEthPrice] = useState('Loading...');
   const [gasPrice, setGasPrice] = useState('Loading...');
+  const [showSupportInfo, setShowSupportInfo] = useState(false);
+  const [showThemeToggle, setShowThemeToggle] = useState(false);
+  const [showCollectorInfo, setShowCollectorInfo] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
 
   useEffect(() => {
     const fetchPrices = async () => {
       try {
-        // Fetch ETH price from CoinGecko
-        const ethRes = await fetch(
-          'https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd'
-        );
-        const ethData = await ethRes.json();
-        if (ethData?.ethereum?.usd != null) {
-          setEthPrice(`$${ethData.ethereum.usd.toFixed(2)}`);
-        } else {
-          setEthPrice('Error');
-        }
-
-        // Fetch gas price from Etherscan
         const apiKey = import.meta.env.VITE_ETHERSCAN_API_KEY;
         if (!apiKey) {
-          setGasPrice('No API key');
+          setEthPrice('No API key set');
+          setGasPrice('No API key set');
           return;
         }
-        const gasRes = await fetch(
+
+        // Fetch ETH price
+        const ethResponse = await fetch(
+          `https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${apiKey}`
+        );
+        const ethData = await ethResponse.json();
+
+        if (ethData.status === '1' && ethData.result?.ethusd) {
+          setEthPrice(`ETH: $${parseFloat(ethData.result.ethusd).toFixed(2)}`);
+        } else {
+          setEthPrice('Error fetching ETH price');
+        }
+
+        // Fetch Gas price
+        const gasResponse = await fetch(
           `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${apiKey}`
         );
-        const gasData = await gasRes.json();
+        const gasData = await gasResponse.json();
+
         if (gasData.status === '1' && gasData.result?.ProposeGasPrice) {
-          setGasPrice(`${gasData.result.ProposeGasPrice} GWEI`);
+          setGasPrice(`Gas: ${gasData.result.ProposeGasPrice} GWEI`);
         } else {
-          setGasPrice('Error');
+          setGasPrice('Error fetching gas price');
         }
-      } catch (err) {
-        console.error('Fetch error:', err);
-        setEthPrice('Failed');
-        setGasPrice('Failed');
+      } catch (error) {
+        setEthPrice('Failed to load');
+        setGasPrice('Failed to load');
+        console.error('Error fetching prices:', error);
       }
     };
 
     fetchPrices();
-    const interval = setInterval(fetchPrices, 60000);
+    const interval = setInterval(fetchPrices, 60000); // Refresh every 60s
+
     return () => clearInterval(interval);
   }, []);
 
   const toggleTheme = () => {
-    const root = document.documentElement;
-    root.classList.toggle('light-mode');
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    document.body.classList.toggle('light-theme');
+    document.body.classList.toggle('dark-theme');
   };
 
   return (
-    <div className="crypto-bar-full">
-      <div className="left">
-        <span className="live-dot"></span>
-        <span className="live-text">Live</span>
-        <span className="eth-price">ETH: {ethPrice}</span>
-        <span className="gas-price">Gas: {gasPrice}</span>
-        <a href="#">Networks</a>
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
+    <div className={`crypto-bar ${theme}`}>
+      <div className="prices">
+        <span>{ethPrice}</span> | <span>{gasPrice}</span> | <span>Status: Live</span>
       </div>
 
-      <div className="right">
-        <a href="#">Support</a>
-        <button onClick={toggleTheme} className="theme-toggle">🌓</button>
-        <button>Collector</button>
-        <button><strong>Crypto</strong></button>
-        <select>
-          <option>USD</option>
-          <option>EUR</option>
-          <option>BTC</option>
-        </select>
+      <div className="controls">
+        <button onClick={() => setShowSupportInfo((v) => !v)}>Support</button>
+        <button onClick={() => setShowThemeToggle((v) => !v)}>🌓 Theme</button>
+        <button onClick={() => setShowCollectorInfo((v) => !v)}>Collector</button>
+        <button onClick={() => alert('Crypto info coming soon!')}>Crypto</button>
       </div>
+
+      {showSupportInfo && (
+        <div className="info-popup support-info">
+          <h4>Support</h4>
+          <p><strong>Name:</strong> Atul your name - atulchief</p>
+          <p>
+            <strong>Twitter:</strong>{' '}
+            <a href="https://x.com/Chief_atul" target="_blank" rel="noopener noreferrer">
+              @Chief_atul
+            </a>
+          </p>
+          <p>
+            <strong>GitHub:</strong>{' '}
+            <a href="https://github.com/atuli93" target="_blank" rel="noopener noreferrer">
+              github.com/atuli93
+            </a>
+          </p>
+          <p>
+            <strong>Email:</strong>{' '}
+            <a href="mailto:atul.chieff60@gmail.com">atul.chieff60@gmail.com</a>
+          </p>
+        </div>
+      )}
+
+      {showThemeToggle && (
+        <div className="info-popup theme-toggle-info">
+          <h4>Theme Toggle</h4>
+          <p>Current theme: <strong>{theme}</strong></p>
+          <button onClick={toggleTheme}>
+            Switch to {theme === 'dark' ? 'light' : 'dark'} theme
+          </button>
+        </div>
+      )}
+
+      {showCollectorInfo && (
+        <div className="info-popup collector-info">
+          <h4>Collector</h4>
+          <p>This section could include info about NFTs or wallet collector stats.</p>
+        </div>
+      )}
     </div>
   );
 }
