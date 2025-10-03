@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import type { ReactNode } from "react";
+import type { ReactNode, FC } from "react";
 import Navbar from "../components/common/Navbar";
 import Chatbot from "../components/ui/Chatbot";
 
@@ -9,16 +9,16 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: FC<LayoutProps> = ({ children }) => {
   const [theme, setTheme] = useState<"dark-theme" | "light-theme">("dark-theme");
 
-  // Load saved theme from localStorage
+  // Load saved theme
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") as "dark-theme" | "light-theme";
     if (savedTheme) setTheme(savedTheme);
   }, []);
 
-  // Apply theme + save
+  // Apply theme + persist
   useEffect(() => {
     document.body.className = theme;
     localStorage.setItem("theme", theme);
@@ -32,8 +32,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className={`main-layout ${theme}`}>
       <header className="layout-header">
         <Navbar />
-        <button onClick={toggleTheme} className="theme-toggle-btn">
-          {theme === "dark-theme" ? "☀️ Light Mode" : "🌙 Dark Mode"}
+        {/* Small theme toggle button, won't affect other buttons */}
+        <button onClick={toggleTheme} className="theme-toggle">
+          {theme === "dark-theme" ? "☀️" : "🌙"}
         </button>
       </header>
 
