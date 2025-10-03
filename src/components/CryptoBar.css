@@ -8,9 +8,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 30px;
+  padding: 12px 40px;
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   color: #c9d1d9;
   z-index: 1000;
   box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.6);
@@ -22,20 +22,22 @@
   color: #58a6ff;
 }
 
-/* Status text and blinking green dot */
 .status {
   display: inline-flex;
   align-items: center;
+  font-weight: 600;
+  color: #58a6ff;
 }
 
+/* Live green blinking dot */
 .live-dot {
   display: inline-block;
   width: 10px;
   height: 10px;
-  margin-left: 8px;
+  margin-left: 6px;
   border-radius: 50%;
-  background-color: #28a745; /* Green */
-  animation: blink 1.5s infinite;
+  background-color: #28a745; /* Bright green */
+  animation: blink 1.5s infinite ease-in-out;
   vertical-align: middle;
 }
 
@@ -53,7 +55,6 @@
   color: #8b949e;
   font-weight: 500;
   line-height: 1.5;
-  min-width: 180px;
 }
 
 .support-title {
@@ -72,7 +73,7 @@
   color: #79c0ff;
 }
 
-/* Prevent content behind the bar */
+/* Prevent page content from hiding behind the bar */
 body, #root {
-  padding-bottom: 50px; /* adjust to bar height */
+  padding-bottom: 60px; /* same height as crypto-bar */
 }
