@@ -54,7 +54,8 @@
 
 /* Logo */
 .navbar-logo {
-  flex-shrink: 0;
+  order: 2;
+  margin-left: 40px; /* Adjust this value to move logo 1-2 tabs right */
 }
 .logo-image {
   height: 60px;
@@ -168,6 +169,7 @@
   }
   .mobile-menu-toggle { display: flex; }
 }
+
 
 
 
