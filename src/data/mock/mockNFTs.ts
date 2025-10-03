@@ -374,7 +374,81 @@ export const mockNFTs: NFT[] = [
     auction: {
       endTime: new Date(Date.now() + 4 * 60 * 60 * 1000),
       highestBid: 7.8
-    }
+    },
+  // Abstract Realm
+  {
+    id: 'fantasy-1',
+    name: 'Fantasy Land #101',
+    description: 'A whimsical NFT collection set in a magical digital world.',
+    image: FantasyLandImg,
+    price: 3.2,
+    currency: 'ETH',
+    creator: { name: 'Fantasy Labs', avatar: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=100&h=100&fit=crop&crop=faces', verified: true },
+    collection: { name: 'Fantasy Land', floorPrice: 2.8 },
+    rarity: 'Epic',
+    likes: 812,
+    views: 4821,
+    lastSale: 3.0,
+    onSale: true
+  },
+  {
+    id: 'galactic-1',
+    name: 'Galactic Punk #202',
+    description: 'Futuristic collectible punks traveling through the galaxy.',
+    image: GalacticPunksImg,
+    price: 5.6,
+    currency: 'ETH',
+    creator: { name: 'Galactic Studios', avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop&crop=faces', verified: true },
+    collection: { name: 'Galactic Punks', floorPrice: 5.0 },
+    rarity: 'Legendary',
+    likes: 1324,
+    views: 7123,
+    lastSale: 5.1,
+    onSale: true
+  },
+  {
+    id: 'robo-1',
+    name: 'Robo Monkey #303',
+    description: 'Mechanical monkeys with AI-powered traits and rarity levels.',
+    image: RoboMonkeysImg,
+    price: 2.9,
+    currency: 'ETH',
+    creator: { name: 'Robo Labs', avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&crop=faces', verified: true },
+    collection: { name: 'Robo Monkeys', floorPrice: 2.5 },
+    rarity: 'Rare',
+    likes: 654,
+    views: 3821,
+    lastSale: 2.7,
+    onSale: true
+  },
+  {
+    id: 'neon-1',
+    name: 'Neon Dragon #404',
+    description: 'Neon-colored dragons glowing in the metaverse.',
+    image: NeonDragonsImg,
+    price: 7.1,
+    currency: 'ETH',
+    creator: { name: 'Neon Studios', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=faces', verified: true },
+    collection: { name: 'Neon Dragons', floorPrice: 6.8 },
+    rarity: 'Epic',
+    likes: 1123,
+    views: 5234,
+    lastSale: 6.9,
+    onSale: true
+  },
+  {
+    id: 'pixel-1',
+    name: 'Pixel Hero #505',
+    description: 'Classic pixel art heroes ready for adventure.',
+    image: PixelHeroesImg,
+    price: 1.7,
+    currency: 'ETH',
+    creator: { name: 'Pixel Labs', avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop&crop=faces', verified: true },
+    collection: { name: 'Pixel Heroes', floorPrice: 1.5 },
+    rarity: 'Rare',
+    likes: 432,
+    views: 2910,
+    lastSale: 1.6,
+    onSale: true
   }
 ];
-
