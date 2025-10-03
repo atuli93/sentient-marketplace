@@ -4,7 +4,7 @@ Welcome to **Sentient Marketplace**, a modern NFT marketplace built with **React
 
 ---
 
-![Home Screenshot]<img src="https://github.com/user-attachments/assets/5408ad26-a9d5-488f-b46b-8224ea3ad003" alt="Home Screenshot" width="800" />
+![Home Screenshot](https://github.com/user-attachments/assets/5408ad26-a9d5-488f-b46b-8224ea3ad003)
 
 ## Features
 
@@ -166,6 +166,7 @@ MIT License – free to use, modify, and share.
 
 ## Contact
 Developed with ❤️ by [atulchief](https://github.com/atuli93)
+
 
 
 
