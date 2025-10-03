@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
 
   const isActiveLink = (path: string) => location.pathname === path;
 
-  // Auto-connect wallet when detected
+  // Auto-connect wallet if detected
   useEffect(() => {
     const autoConnect = async () => {
       if (isConnected && address && !user) {
@@ -91,10 +91,12 @@ const Navbar: React.FC = () => {
             </button>
           )}
 
-          {/* RainbowKit Connect Button - Pink */}
-          <div className="login-btn">
-            <ConnectButton chainStatus="icon" showBalance={false} />
-          </div>
+          {/* Connect Wallet Button */}
+          <ConnectButton
+            chainStatus="icon"
+            showBalance={false}
+            className="rainbowkit-connect-button"
+          />
         </div>
 
         {/* Mobile Menu Toggle */}
