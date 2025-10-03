@@ -174,8 +174,4 @@ Abstract Realm
 MIT License – free to use, modify, and share.  
 
 ## Contact
-Developed with ❤️ by [atulchief][https://github.com/atuli93](https://github.com/atuli93)
-
-
-
-
+Developed with ❤️ by [atulchief](https://github.com/atuli93)
