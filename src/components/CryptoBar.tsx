@@ -48,7 +48,7 @@ const CryptoBar: React.FC = () => {
           rel="noreferrer"
           className="support-link"
         >
-          Support — @Chief_atul
+          Support
         </a>
       </div>
     </div>
