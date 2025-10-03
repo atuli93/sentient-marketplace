@@ -77,7 +77,7 @@ const Navbar: React.FC = () => {
             </button>
           )}
 
-          <ConnectButton chainStatus="icon" showBalance={false} />
+          <ConnectButton chainStatus="icon" showBalance={false} className="custom-connect-button" />
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -90,3 +90,4 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+
