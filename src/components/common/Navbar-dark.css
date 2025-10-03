@@ -17,7 +17,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
   position: relative;
 }
 
@@ -26,7 +25,6 @@
   flex: 1;
   max-width: 300px;
   position: relative;
-  order: 1;
 }
 
 .search-icon {
@@ -60,7 +58,9 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  order: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo-image {
@@ -77,8 +77,7 @@
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 24px;
-  order: 3;
+  gap: 16px;
 }
 
 /* Navbar Links */
