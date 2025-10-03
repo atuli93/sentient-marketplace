@@ -5,6 +5,7 @@
   padding: 16px;
   transition: transform 0.2s ease, border 0.2s ease;
   border: 1px solid var(--border-secondary);
+  position: relative;
 }
 
 .card:hover {
@@ -16,6 +17,45 @@
   width: 100%;
   border-radius: 12px;
   margin-bottom: 12px;
+  position: relative;
+}
+
+/* 💖 Heart + Views Badge */
+.card-actions {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 6px 10px;
+  border-radius: 8px;
+  z-index: 2;
+  color: #fff;
+}
+
+.card-actions .like-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ff6b6b;
+  transition: transform 0.2s ease;
+}
+
+.card-actions .like-btn.liked {
+  color: #ff4d4f;
+}
+
+.card-actions .like-btn:hover {
+  transform: scale(1.1);
+}
+
+.card-actions .view-count {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
 }
 
 .card-title {
