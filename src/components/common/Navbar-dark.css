@@ -66,6 +66,25 @@
   transform: scale(1.05);
 }
 
+/* Diwali Glow Animation */
+@keyframes diwali-glow {
+  0% {
+    filter: drop-shadow(0 0 5px #f26486)
+            drop-shadow(0 0 10px #ffb347)
+            drop-shadow(0 0 15px #ffec61);
+  }
+  50% {
+    filter: drop-shadow(0 0 15px #f26486)
+            drop-shadow(0 0 25px #ffb347)
+            drop-shadow(0 0 35px #ffec61);
+  }
+  100% {
+    filter: drop-shadow(0 0 5px #f26486)
+            drop-shadow(0 0 10px #ffb347)
+            drop-shadow(0 0 15px #ffec61);
+  }
+}
+
 /* Right: Nav Links + Actions */
 .navbar-right {
   display: flex;
@@ -169,3 +188,4 @@
   }
   .mobile-menu-toggle { display: flex; }
 }
+
