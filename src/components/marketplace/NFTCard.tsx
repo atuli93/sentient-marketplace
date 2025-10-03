@@ -18,15 +18,21 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
     onLike?.(nft.id);
   };
 
-  const formatPrice = (price: number) => (price < 1 ? price.toFixed(3) : price.toFixed(2));
+  const formatPrice = (price: number) =>
+    price < 1 ? price.toFixed(3) : price.toFixed(2);
 
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
-      case 'Common': return '#8a939b';
-      case 'Rare': return '#2081e2';
-      case 'Epic': return '#9333ea';
-      case 'Legendary': return '#f59e0b';
-      default: return '#8a939b';
+      case 'Common':
+        return '#8a939b';
+      case 'Rare':
+        return '#2081e2';
+      case 'Epic':
+        return '#9333ea';
+      case 'Legendary':
+        return '#f59e0b';
+      default:
+        return '#8a939b';
     }
   };
 
@@ -42,26 +48,33 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
 
         {nft.auction && (
           <div className="auction-timer">
-            <Clock size={14} />
+            <Clock size={14} stroke="#fff" />
             <span>2h 34m</span>
           </div>
         )}
 
         <div className="quick-actions">
-          <button className={`like-btn ${isLiked ? 'liked' : ''}`} onClick={handleLike}>
+          <button
+            className={`like-btn ${isLiked ? 'liked' : ''}`}
+            onClick={handleLike}
+          >
             <Heart
               size={20}
-              stroke={isLiked ? '#ff6b6b' : '#ffffff'}
+              stroke={isLiked ? '#ff6b6b' : '#ffffff'} // always visible
               fill={isLiked ? '#ff6b6b' : 'none'}
+              className={isLiked ? 'heart-pop' : ''}
             />
           </button>
           <div className="view-count">
-            <Eye size={14} />
+            <Eye size={14} stroke="#ffffff" />
             <span>{nft.views}</span>
           </div>
         </div>
 
-        <div className="rarity-badge" style={{ backgroundColor: getRarityColor(nft.rarity) }}>
+        <div
+          className="rarity-badge"
+          style={{ backgroundColor: getRarityColor(nft.rarity) }}
+        >
           {nft.rarity}
         </div>
       </div>
