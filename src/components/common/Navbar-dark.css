@@ -16,16 +16,17 @@
   padding: 12px 24px;
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Align items to left */
+  justify-content: space-between; /* space between left, center, right */
+  position: relative;
   gap: 16px;
 }
 
 /* Logo */
 .navbar-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  order: 2;
 }
 
 .logo-image {
@@ -41,9 +42,8 @@
 /* Search Bar */
 .navbar-search {
   flex: 1;
-  max-width: 400px;
-  position: relative;
-  margin: 0 24px;
+  max-width: 300px;
+  order: 1; /* left side */
 }
 
 .search-icon {
@@ -113,7 +113,8 @@
 .navbar-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
+  order: 3;
 }
 
 /* Action Buttons */
@@ -200,6 +201,7 @@
   }
   .mobile-menu-toggle { display: flex; }
 }
+
 
 
 
