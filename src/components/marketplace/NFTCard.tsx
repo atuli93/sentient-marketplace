@@ -47,14 +47,14 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
         {nft.auction && (
           <div className="auction-timer">
             <Clock size={14} />
-            <span>2h 34m</span>
+            <span>0h 11m</span>
           </div>
         )}
 
         {/* Quick Actions */}
         <div className="quick-actions">
           <button
-            className={`like-btn ${isLiked ? 'liked' : ''}`}
+            className={`like-btn ${isLiked ? '❤️' : ''}`}
             onClick={handleLike}
           >
             <Heart size={16} fill={isLiked ? '#ff6b6b' : 'none'} />
@@ -126,3 +126,4 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
 };
 
 export default NFTCard;
+
