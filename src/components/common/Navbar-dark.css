@@ -18,30 +18,15 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  position: relative;
 }
 
-/* Logo (left) */
-.navbar-logo {
-  order: 1;
-}
-
-.logo-image {
-  height: 50px;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.navbar-logo:hover .logo-image {
-  transform: scale(1.05);
-}
-
-/* Search Bar (optional, left of logo or hidden) */
+/* Search Bar (Left) */
 .navbar-search {
   flex: 1;
   max-width: 300px;
-  margin-left: 16px;
   position: relative;
-  order: 2;
+  order: 1;
 }
 
 .search-icon {
@@ -70,12 +55,37 @@
   background: #2a2a34;
 }
 
-/* Navbar Links (right side) */
+/* Logo (Center) */
+.navbar-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  order: 2;
+}
+
+.logo-image {
+  height: 50px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo:hover .logo-image {
+  transform: scale(1.05);
+}
+
+/* Right Side Links + Actions */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  order: 3;
+}
+
+/* Navbar Links */
 .navbar-links {
   display: flex;
   align-items: center;
-  gap: 32px;
-  order: 3;
+  gap: 16px;
 }
 
 .nav-link {
@@ -108,13 +118,6 @@
   width: 100%;
 }
 
-/* Navbar Actions */
-.navbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
 /* Action Buttons */
 .action-btn {
   display: flex;
@@ -138,17 +141,7 @@
   color: #f26486;
 }
 
-.btn-label {
-  font-size: 12px;
-  font-weight: 600;
-  display: none;
-}
-
-.action-btn:hover .btn-label {
-  display: block;
-}
-
-/* RainbowKit Connect Button (Pink) */
+/* RainbowKit Connect Button */
 .login-btn .rainbowkit-connect-button {
   background: linear-gradient(135deg, #f26486 0%, #ff69b4 100%) !important;
   color: white !important;
@@ -176,18 +169,12 @@
   justify-content: center;
 }
 
-/* ---------------- Responsive ---------------- */
-@media (max-width: 1024px) {
-  .navbar-search { max-width: 200px; }
-  .navbar-links { gap: 16px; }
-}
-
+/* Responsive */
 @media (max-width: 768px) {
   .navbar-search { display: none; }
   .navbar-links {
     position: absolute;
     top: 100%;
-    left: 0;
     right: 0;
     flex-direction: column;
     padding: 16px;
@@ -198,14 +185,6 @@
     visibility: hidden;
     transition: all 0.3s ease;
   }
-  .navbar-links.active {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-  }
+  .navbar-links.active { transform: translateY(0); opacity: 1; visibility: visible; }
   .mobile-menu-toggle { display: flex; }
-}
-
-@media (max-width: 480px) {
-  .logo-image { height: 40px; }
 }
