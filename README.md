@@ -111,11 +111,9 @@ npm run dev
 ## NFT Collections Included    
 
 Here is a list of NFT collections currently available in the marketplace:  
-
-| Bored Ape Yacht Club | Azuki | Pudgy Penguins | CryptoPunks | Doodles | Moonbirds | CloneX | DeGods | Mutant Ape | Meebits | VeeFriends | Cool Cats | World of Women | Cyber Warrior |   Abstract Realm |
-|--------------------|-------|----------------|------------|--------|-----------|-------|-------|------------|--------|-----------|-----------|----------------|---------------|----------------|  
-| *More collections can be easily added in `src/data/mock/mockNFTs.ts`* |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  
-
+| Bored Ape Yacht Club | Azuki | Pudgy Penguins | CryptoPunks | Doodles | Moonbirds | CloneX | DeGods | Mutant Ape | Meebits | VeeFriends | Cool Cats | World of Women | Cyber Warrior | Abstract Realm |
+|--------------------|-------|----------------|------------|--------|-----------|-------|-------|------------|--------|-----------|-----------|----------------|---------------|----------------|
+**More collections can be easily added in ```src/data/mock/mockNFTs.ts```**
 
 ## Adding New NFTs
 
@@ -164,6 +162,7 @@ MIT License – free to use, modify, and share.
 
 ## Contact
 Developed with ❤️ by [atulchief](https://github.com/atuli93)
+
 
 
 
