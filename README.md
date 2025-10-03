@@ -16,6 +16,13 @@ Welcome to **Sentient Marketplace**, a modern NFT marketplace built with **React
 
 ---
 
+## Links
+
+- **Website:** [https://sentient-marketplace-io.netlify.app/](https://sentient-marketplace-io.netlify.app/)  
+- **Twitter:** [https://x.com/Chief_atul](https://x.com/Chief_atul)  
+
+---
+
 ## 🗂 Project Structure
 ```bash
 sentient-marketplace/
@@ -164,6 +171,9 @@ Abstract Realm
 - Open a Pull Request   
 
 ## License
+MIT License – free to use, modify, and share.  
 
-This project is MIT licensed
+## Contact
+Developed with ❤️ by [Your Name]([https://github.com/atuli93](https://github.com/atuli93))
+
 
