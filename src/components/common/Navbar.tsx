@@ -17,27 +17,17 @@ const Navbar: React.FC = () => {
 
   const isActiveLink = (path: string) => location.pathname === path;
 
-  // Auto-connect wallet if detected
   useEffect(() => {
-    const autoConnect = async () => {
-      if (isConnected && address && !user) {
-        await connectWallet(address, 'injected');
-      }
-    };
-    autoConnect();
+    if (isConnected && address && !user) connectWallet(address, 'injected');
   }, [isConnected, address, user, connectWallet]);
-
-  const handleProfileClick = () => navigate('/profile');
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        {/* Logo */}
         <Link to="/" className="navbar-logo">
           <img src={SentientLogo} alt="Sentient" className="logo-image" />
         </Link>
 
-        {/* Search Bar */}
         <div className="navbar-search">
           <Search size={20} className="search-icon" />
           <input
@@ -49,61 +39,30 @@ const Navbar: React.FC = () => {
           />
         </div>
 
-        {/* Navigation Links */}
         <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
-          <Link
-            to="/marketplace"
-            className={`nav-link ${isActiveLink('/') || isActiveLink('/marketplace') ? 'active' : ''}`}
-          >
-            Explore
-          </Link>
-          <Link
-            to="/collections"
-            className={`nav-link ${isActiveLink('/collections') ? 'active' : ''}`}
-          >
-            Collections
-          </Link>
-          <Link
-            to="/stats"
-            className={`nav-link ${isActiveLink('/stats') ? 'active' : ''}`}
-          >
-            Stats
-          </Link>
-          <Link
-            to="/create"
-            className={`nav-link ${isActiveLink('/create') ? 'active' : ''}`}
-          >
-            Create
-          </Link>
+          <Link to="/marketplace" className={`nav-link ${isActiveLink('/marketplace') ? 'active' : ''}`}>Explore</Link>
+          <Link to="/collections" className={`nav-link ${isActiveLink('/collections') ? 'active' : ''}`}>Collections</Link>
+          <Link to="/stats" className={`nav-link ${isActiveLink('/stats') ? 'active' : ''}`}>Stats</Link>
+          <Link to="/create" className={`nav-link ${isActiveLink('/create') ? 'active' : ''}`}>Create</Link>
         </div>
 
-        {/* User Actions */}
         <div className="navbar-actions">
           <button className="action-btn cart-btn" title="Shopping Cart">
             <ShoppingCart size={20} />
-            <span className="btn-label">Cart</span>
           </button>
 
           {isConnected && (
-            <button className="action-btn profile-btn" onClick={handleProfileClick} title="Profile">
+            <button className="action-btn profile-btn" title="Profile" onClick={() => navigate('/profile')}>
               <User size={20} />
-              <span className="btn-label">Profile</span>
             </button>
           )}
 
-          {/* Connect Wallet Button */}
-          <ConnectButton
-            chainStatus="icon"
-            showBalance={false}
-            className="rainbowkit-connect-button"
-          />
+          <div className="login-btn">
+            <ConnectButton chainStatus="icon" showBalance={false} />
+          </div>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className="mobile-menu-toggle"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
+        <button className="mobile-menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
