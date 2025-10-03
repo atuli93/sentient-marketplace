@@ -18,9 +18,7 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
     onLike?.(nft.id);
   };
 
-  const formatPrice = (price: number) => {
-    return price < 1 ? price.toFixed(3) : price.toFixed(2);
-  };
+  const formatPrice = (price: number) => (price < 1 ? price.toFixed(3) : price.toFixed(2));
 
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
@@ -51,13 +49,14 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
           </div>
         )}
 
-        {/* Quick Actions */}
+        {/* Instagram-style Like & View */}
         <div className="quick-actions">
           <button
             className={`like-btn ${isLiked ? 'liked' : ''}`}
             onClick={handleLike}
+            aria-label={isLiked ? 'Unlike' : 'Like'}
           >
-            ❤️
+            <Heart size={20} fill={isLiked ? '#e0245e' : 'none'} stroke="#fff" />
           </button>
           <div className="view-count">
             <Eye size={14} />
@@ -76,15 +75,11 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
 
       {/* NFT Info */}
       <div className="nft-info">
-        {/* Collection */}
         <div className="collection-info">
           <span className="collection-name">{nft.collection.name}</span>
         </div>
-
-        {/* NFT Name */}
         <h3 className="nft-name">{nft.name}</h3>
 
-        {/* Price Section */}
         <div className="price-section">
           <div className="current-price">
             <span className="price-label">Price</span>
@@ -97,19 +92,19 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
           {nft.lastSale && (
             <div className="last-sale">
               <span className="last-sale-label">Last Sale</span>
-              <span className="last-sale-value">{formatPrice(nft.lastSale)} {nft.currency}</span>
+              <span className="last-sale-value">
+                {formatPrice(nft.lastSale)} {nft.currency}
+              </span>
             </div>
           )}
         </div>
 
-        {/* Action Buttons */}
         <div className="action-buttons">
           {nft.onSale && (
             <>
               {nft.auction ? (
                 <button className="bid-btn" onClick={() => onBuy?.(nft.id)}>
-                  <Zap size={16} />
-                  Place Bid
+                  <Zap size={16} /> Place Bid
                 </button>
               ) : (
                 <button className="buy-btn" onClick={() => onBuy?.(nft.id)}>
@@ -126,6 +121,3 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
 };
 
 export default NFTCard;
-
-
-
