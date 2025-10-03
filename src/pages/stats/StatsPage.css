@@ -2,6 +2,8 @@
   width: 100%;
   padding: 32px;
   min-height: calc(100vh - 80px);
+  background-color: #f9fafb;
+  font-family: "Inter", sans-serif;
 }
 
 .stats-header {
@@ -25,7 +27,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 24px;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto 64px;
 }
 
@@ -63,14 +65,18 @@
 .stat-change {
   font-size: 14px;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
 .stat-change.positive {
-  color: #10b981;
+  color: #10b981; /* green */
 }
 
 .stat-change.negative {
-  color: #ef4444;
+  color: #ef4444; /* red */
 }
 
 .coming-soon {
@@ -83,4 +89,11 @@
   font-size: 32px;
   margin-bottom: 16px;
   color: #04111d;
+}
+
+.coming-soon p {
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
 }
