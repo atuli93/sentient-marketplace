@@ -36,14 +36,15 @@ const Navbar: React.FC = () => {
               className="search-input"
             />
           </div>
-        </div>
 
-        {/* Right: Logo + Links + Actions */}
-        <div className="navbar-right">
+          {/* Logo next to search */}
           <Link to="/" className="navbar-logo">
             <img src={SentientLogo} alt="Sentient" className="logo-image" />
           </Link>
+        </div>
 
+        {/* Right: Links + Actions */}
+        <div className="navbar-right">
           <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
             <Link to="/marketplace" className={`nav-link ${isActiveLink('/marketplace') ? 'active' : ''}`}>Explore</Link>
             <Link to="/collections" className={`nav-link ${isActiveLink('/collections') ? 'active' : ''}`}>Collections</Link>
