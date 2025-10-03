@@ -1,4 +1,4 @@
-# Sentient Marketplace
+# Sentient Marketplace 🚀
 
 Welcome to **Sentient Marketplace**, a modern NFT marketplace built with **React**, **TypeScript**, and **Vite**. Explore and showcase a variety of NFT collections, including Bored Ape Yacht Club, Azuki, CryptoPunks, Doodles, and many more. This project also features mock NFT data, real-time stats, and an AI-powered chat interface.  
 
@@ -23,7 +23,7 @@ Welcome to **Sentient Marketplace**, a modern NFT marketplace built with **React
 
 ---
 
-## 🗂 Project Structure
+## Project Structure
 ```bash
 sentient-marketplace/
 ├─ public/ # Static assets served directly
@@ -175,4 +175,5 @@ MIT License – free to use, modify, and share.
 
 ## Contact
 Developed with ❤️ by [atulchief](https://github.com/atuli93)
+
 
