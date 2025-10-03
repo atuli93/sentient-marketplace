@@ -116,7 +116,7 @@ npm run dev
 |----------------|-------|-----------|--------------------|-------------|-------|---------------|------------|---------------|-------|--------|---------------|
 | Meebit | Moonbirds | Mutant Ape | Mutant Cat | Neon Apes | Pixel Heroes | Pudgy Penguins | Robo Monkeys | VeeFriends | World of Women | Cool Cats |  |
 
-![NFT Marketplace Screenshot]<img width="1919" height="1006" alt="Screenshot 2025-10-03 180459" src="https://github.com/user-attachments/assets/ad41fd28-e029-4532-9baa-0f0ad7a8d725" />
+![NFT Marketplace Screenshot](https://github.com/user-attachments/assets/ad41fd28-e029-4532-9baa-0f0ad7a8d725)
 
 
 **More collections can be easily added in ```src/data/mock/mockNFTs.ts```**
@@ -169,6 +169,7 @@ MIT License – free to use, modify, and share.
 
 ## Contact
 Developed with ❤️ by [atulchief](https://github.com/atuli93)
+
 
 
 
