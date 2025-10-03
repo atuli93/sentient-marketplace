@@ -17,16 +17,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
   gap: 16px;
 }
 
-/* Logo (center) */
+/* Logo (left) */
 .navbar-logo {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  order: 2;
+  order: 1;
 }
 
 .logo-image {
@@ -39,12 +35,13 @@
   transform: scale(1.05);
 }
 
-/* Search Bar (left) */
+/* Search Bar (optional, left of logo or hidden) */
 .navbar-search {
   flex: 1;
   max-width: 300px;
-  order: 1;
+  margin-left: 16px;
   position: relative;
+  order: 2;
 }
 
 .search-icon {
@@ -73,7 +70,7 @@
   background: #2a2a34;
 }
 
-/* Navbar Links (right) */
+/* Navbar Links (right side) */
 .navbar-links {
   display: flex;
   align-items: center;
@@ -116,9 +113,9 @@
   display: flex;
   align-items: center;
   gap: 24px;
-  order: 3;
 }
 
+/* Action Buttons */
 .action-btn {
   display: flex;
   align-items: center;
