@@ -5,9 +5,9 @@ import "./CollectionsPage.css";
 const collections = [
   {
     id: 1,
-    name: "Cosmic Wanderers",
+    name: "Hypurr",
     image:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=200&fit=crop",
+      "https://images.unsplash.com/photo-1612760721786-a42eb89aba02?q=80&w=1935&auto=format&fit=crop",
     floor: "9.3 ETH",
     volume: "7.4K ETH",
   },
@@ -15,7 +15,7 @@ const collections = [
     id: 2,
     name: "Milady Maker",
     image:
-      "https://images.unsplash.com/photo-1582125169590-59f4985fb32a?q=80&w=1996&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1746039076843-35f8883646cf?q=80&w=1957&auto=format&fit=crop",
     floor: "1.63 ETH",
     volume: "589.66 ETH",
   },
@@ -79,3 +79,4 @@ const CollectionsPage: React.FC = () => {
 };
 
 export default CollectionsPage;
+
