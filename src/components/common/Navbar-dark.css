@@ -16,12 +16,12 @@
   padding: 12px 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* space between left, center, right */
+  justify-content: space-between;
   position: relative;
   gap: 16px;
 }
 
-/* Logo */
+/* Logo (center) */
 .navbar-logo {
   position: absolute;
   left: 50%;
@@ -39,11 +39,12 @@
   transform: scale(1.05);
 }
 
-/* Search Bar */
+/* Search Bar (left) */
 .navbar-search {
   flex: 1;
   max-width: 300px;
-  order: 1; /* left side */
+  order: 1;
+  position: relative;
 }
 
 .search-icon {
@@ -72,11 +73,12 @@
   background: #2a2a34;
 }
 
-/* Navbar Links */
+/* Navbar Links (right) */
 .navbar-links {
   display: flex;
   align-items: center;
   gap: 32px;
+  order: 3;
 }
 
 .nav-link {
@@ -117,7 +119,6 @@
   order: 3;
 }
 
-/* Action Buttons */
 .action-btn {
   display: flex;
   align-items: center;
@@ -150,9 +151,9 @@
   display: block;
 }
 
-/* RainbowKit Connect Button Override */
+/* RainbowKit Connect Button (Pink) */
 .login-btn .rainbowkit-connect-button {
-  background: linear-gradient(135deg, #d85c7c 100%, #ff69b4 0%) !important;
+  background: linear-gradient(135deg, #f26486 0%, #ff69b4 100%) !important;
   color: white !important;
   border-radius: 12px !important;
   box-shadow: 0 2px 6px rgba(242, 100, 134, 0.3) !important;
@@ -164,7 +165,7 @@
   transform: translateY(-2px);
 }
 
-/* Mobile Menu */
+/* Mobile Menu Toggle */
 .mobile-menu-toggle {
   display: none;
   width: 44px;
@@ -176,6 +177,12 @@
   cursor: pointer;
   align-items: center;
   justify-content: center;
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 1024px) {
+  .navbar-search { max-width: 200px; }
+  .navbar-links { gap: 16px; }
 }
 
 @media (max-width: 768px) {
@@ -202,6 +209,6 @@
   .mobile-menu-toggle { display: flex; }
 }
 
-
-
-
+@media (max-width: 480px) {
+  .logo-image { height: 40px; }
+}
