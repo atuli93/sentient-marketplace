@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { WagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -7,7 +8,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import Layout from './layout/Layout';
 import AppRoutes from './routes';
 import Chatbot from './components/ui/Chatbot';
-import CryptoBar from './components/CryptoBar';
+import CryptoBar from './components/CryptoBar'; // Import CryptoBar
 import './App.css';
 import '@rainbow-me/rainbowkit/styles.css';
 
@@ -27,12 +28,12 @@ function App() {
         >
           <AuthProvider>
             <Router>
+              {/* CryptoBar always visible at bottom */}
+              <CryptoBar />
               <Layout>
                 <AppRoutes />
                 <Chatbot />
               </Layout>
-              {/* Place CryptoBar outside Layout, at bottom */}
-              <CryptoBar />
             </Router>
           </AuthProvider>
         </RainbowKitProvider>
