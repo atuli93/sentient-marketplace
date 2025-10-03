@@ -44,7 +44,7 @@
   border-radius: 12px;
   border: 2px solid #2a2a2a;
   background: #1c1c24;
-  color: #fff;
+  color: #d85c7c;
   font-size: 16px;
 }
 .search-input:focus {
@@ -79,10 +79,12 @@
 }
 .nav-link {
   color: #aaa;
+  font-weight: 500;   /* Lighter weight for smaller look */
+  font-size: 13px;    /* Smaller font size */
   text-decoration: none;
-  font-weight: 600;
   position: relative;
-  padding: 8px 0;
+  padding: 4px 0;     /* Adjust vertical padding */
+  transition: color 0.2s ease;
 }
 .nav-link.active,
 .nav-link:hover {
@@ -91,7 +93,7 @@
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: -4px;
+  bottom: -3px;
   left: 0;
   height: 2px;
   width: 0;
@@ -166,5 +168,6 @@
   }
   .mobile-menu-toggle { display: flex; }
 }
+
 
 
