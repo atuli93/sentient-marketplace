@@ -1,58 +1,97 @@
 /* ===============================
-   🌙 Dark Theme
-   =============================== */
-.dark-theme {
-  --bg-main: #0a0b0d;
-  --bg-surface: #13141a;
+   THEME VARIABLES
+================================= */
+:root {
+  --bg-primary: #0a0b0d;
+  --bg-secondary: #13141a;
   --bg-card: #1a1d24;
   --bg-hover: #252830;
 
-  --text-main: #ffffff;
-  --text-subtle: #a0a3a8;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a3a8;
   --text-muted: #6c7075;
 
-  --accent: #4f46e5;
-  --accent-alt: #7c3aed;
+  --accent-primary: #4f46e5;
+  --accent-secondary: #7c3aed;
 
-  --border-light: #2d3037;
-  --border-dark: #404040;
+  --border-primary: #2d3037;
+  --border-secondary: #404040;
+}
+
+/* Light Theme Overrides */
+body.light-theme {
+  --bg-primary: #f8f9fa;
+  --bg-secondary: #ffffff;
+  --bg-card: #f1f3f5;
+  --bg-hover: #e9ecef;
+
+  --text-primary: #1c1c1c;
+  --text-secondary: #444;
+  --text-muted: #666;
+
+  --accent-primary: #4f46e5;
+  --accent-secondary: #7c3aed;
+
+  --border-primary: #d1d5db;
+  --border-secondary: #e5e7eb;
 }
 
 /* ===============================
-   ☀️ Light Theme
-   =============================== */
-.light-theme {
-  --bg-main: #f9fafb;
-  --bg-surface: #ffffff;
-  --bg-card: #f3f4f6;
-  --bg-hover: #e5e7eb;
+   LAYOUT BASE
+================================= */
+.main-layout {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
 
-  --text-main: #111827;
-  --text-subtle: #374151;
-  --text-muted: #6b7280;
+.main-content {
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
 
-  --accent: #2563eb;
-  --accent-alt: #7c3aed;
+.layout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-primary);
+  padding: 0.75rem 1.5rem;
+}
 
-  --border-light: #d1d5db;
-  --border-dark: #9ca3af;
+.layout-chatbot {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 999;
 }
 
 /* ===============================
-   🔄 Shared Variables
-   =============================== */
-:root {
-  --rounded-sm: 6px;
-  --rounded-md: 12px;
-  --rounded-lg: 20px;
+   THEME TOGGLE BUTTON (scoped)
+================================= */
+.theme-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  margin-left: 1rem;
+  transition: transform 0.2s ease;
+  color: var(--text-primary);
+}
 
-  --speed-fast: 0.2s ease;
-  --speed-normal: 0.3s ease;
+.theme-toggle:hover {
+  transform: scale(1.2);
 }
 
 /* ===============================
-   🔄 Reset & Base
-   =============================== */
+   RESET
+================================= */
 * {
   margin: 0;
   padding: 0;
@@ -60,88 +99,16 @@
 }
 
 html, body {
-  height: 100%;
   width: 100%;
-  font-family: "Segoe UI", Roboto, Ubuntu, sans-serif;
-  font-size: 16px;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
   line-height: 1.6;
-  background: var(--bg-main);
-  color: var(--text-main);
-  -webkit-font-smoothing: antialiased;
-  transition: background var(--speed-normal), color var(--speed-normal);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
 }
 
 #root {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ===============================
-   📐 Layout
-   =============================== */
-.main-layout {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: var(--bg-main);
-}
-
-.layout-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid var(--border-light);
-}
-
-.main-content {
-  flex: 1;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.layout-chatbot {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-}
-
-/* ===============================
-   🎨 Helpers
-   =============================== */
-.text-subtle { color: var(--text-subtle); }
-.text-muted  { color: var(--text-muted); }
-
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-radius: var(--rounded-md);
-  padding: 1.5rem;
-  transition: background var(--speed-fast), border var(--speed-fast);
-}
-
-.card:hover {
-  background: var(--bg-hover);
-  border-color: var(--border-dark);
-}
-
-/* ===============================
-   🌗 Theme Toggle Button
-   =============================== */
-.theme-toggle-btn {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: var(--rounded-sm);
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background var(--speed-fast);
-}
-
-.theme-toggle-btn:hover {
-  background: var(--accent-alt);
+  height: 100%;
 }
