@@ -10,13 +10,14 @@
 }
 
 .navbar-container {
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: 12px 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  justify-content: flex-start; /* Align items to left */
+  gap: 16px;
 }
 
 /* Logo */
@@ -40,7 +41,7 @@
 /* Search Bar */
 .navbar-search {
   flex: 1;
-  max-width: 500px;
+  max-width: 400px;
   position: relative;
   margin: 0 24px;
 }
@@ -199,5 +200,6 @@
   }
   .mobile-menu-toggle { display: flex; }
 }
+
 
 
