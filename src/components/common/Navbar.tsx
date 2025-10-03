@@ -17,6 +17,7 @@ const Navbar: React.FC = () => {
 
   const isActiveLink = (path: string) => location.pathname === path;
 
+  // Auto-connect wallet when detected
   useEffect(() => {
     const autoConnect = async () => {
       if (isConnected && address && !user) {
@@ -31,8 +32,13 @@ const Navbar: React.FC = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        {/* Top-left Search Bar */}
-        <div className="navbar-search-top">
+        {/* Logo */}
+        <Link to="/" className="navbar-logo">
+          <img src={SentientLogo} alt="Sentient" className="logo-image" />
+        </Link>
+
+        {/* Search Bar */}
+        <div className="navbar-search">
           <Search size={20} className="search-icon" />
           <input
             type="text"
@@ -41,26 +47,34 @@ const Navbar: React.FC = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"
           />
-          {searchQuery && (
-            <ul className="search-suggestions">
-              <li onClick={() => navigate(`/collections/${searchQuery}`)}>Go to Collection: {searchQuery}</li>
-              <li onClick={() => navigate(`/nft/${searchQuery}`)}>View NFT: {searchQuery}</li>
-              <li onClick={() => navigate(`/user/${searchQuery}`)}>Find Creator: {searchQuery}</li>
-            </ul>
-          )}
         </div>
-
-        {/* Logo */}
-        <Link to="/" className="navbar-logo">
-          <img src={SentientLogo} alt="Sentient" className="logo-image" />
-        </Link>
 
         {/* Navigation Links */}
         <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
-          <Link to="/marketplace" className={`nav-link ${isActiveLink('/') || isActiveLink('/marketplace') ? 'active' : ''}`}>Explore</Link>
-          <Link to="/collections" className={`nav-link ${isActiveLink('/collections') ? 'active' : ''}`}>Collections</Link>
-          <Link to="/stats" className={`nav-link ${isActiveLink('/stats') ? 'active' : ''}`}>Stats</Link>
-          <Link to="/create" className={`nav-link ${isActiveLink('/create') ? 'active' : ''}`}>Create</Link>
+          <Link
+            to="/marketplace"
+            className={`nav-link ${isActiveLink('/') || isActiveLink('/marketplace') ? 'active' : ''}`}
+          >
+            Explore
+          </Link>
+          <Link
+            to="/collections"
+            className={`nav-link ${isActiveLink('/collections') ? 'active' : ''}`}
+          >
+            Collections
+          </Link>
+          <Link
+            to="/stats"
+            className={`nav-link ${isActiveLink('/stats') ? 'active' : ''}`}
+          >
+            Stats
+          </Link>
+          <Link
+            to="/create"
+            className={`nav-link ${isActiveLink('/create') ? 'active' : ''}`}
+          >
+            Create
+          </Link>
         </div>
 
         {/* User Actions */}
@@ -77,11 +91,17 @@ const Navbar: React.FC = () => {
             </button>
           )}
 
-          <ConnectButton chainStatus="icon" showBalance={false} className="custom-connect-button" />
+          {/* RainbowKit Connect Button - Pink */}
+          <div className="login-btn">
+            <ConnectButton chainStatus="icon" showBalance={false} />
+          </div>
         </div>
 
         {/* Mobile Menu Toggle */}
-        <button className="mobile-menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <button
+          className="mobile-menu-toggle"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
@@ -90,4 +110,3 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-
