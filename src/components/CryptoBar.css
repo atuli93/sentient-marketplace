@@ -1,3 +1,64 @@
+.crypto-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #0d1117;
+  border-top: 1px solid #30363d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #c9d1d9;
+  z-index: 1000;
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.5);
+  user-select: none;
+}
+
+.crypto-info {
+  display: flex;
+  gap: 16px;
+  font-weight: 500;
+  color: #58a6ff;
+  align-items: center;
+}
+
+.crypto-info span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #4ade80; /* Green shade */
+}
+
+.live-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: #4ade80;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.support-section {
+  text-align: right;
+}
+
 .support-link {
   color: #58a6ff;
   font-weight: 500;
@@ -8,4 +69,9 @@
 .support-link:hover {
   color: #79c0ff;
   text-decoration: underline;
+}
+
+/* Ensure page content isn't hidden behind bar */
+body, #root {
+  padding-bottom: 40px; /* Height of the bar */
 }
