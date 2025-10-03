@@ -60,10 +60,11 @@
 .logo-image {
   height: 60px;
   object-fit: contain;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease; filter 0.3s ease;
 }
 .navbar-logo:hover .logo-image {
-  transform: scale(1.05);
+  transform: scale(1.1);
+  animation: diwali-glow 1.5s infinite alternate;
 }
 
 /* Diwali Glow Animation */
@@ -188,4 +189,5 @@
   }
   .mobile-menu-toggle { display: flex; }
 }
+
 
