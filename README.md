@@ -18,8 +18,8 @@ Welcome to **Sentient Marketplace**, a modern NFT marketplace built with **React
 
 ## Links
 
-- **Website:** [https://sentient-marketplace-io.netlify.app/](https://sentient-marketplace-io.netlify.app/)  
-- **Twitter:** [https://x.com/Chief_atul](https://x.com/Chief_atul)  
+- **Website:** [🔗Links](https://sentient-marketplace-io.netlify.app/)  
+- **Twitter:** [🔗Links](https://x.com/Chief_atul)  
 
 ---
 
@@ -175,3 +175,4 @@ MIT License – free to use, modify, and share.
 
 ## Contact
 Developed with ❤️ by [atulchief](https://github.com/atuli93)
+
