@@ -24,47 +24,53 @@ const Navbar: React.FC = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
-          <img src={SentientLogo} alt="Sentient" className="logo-image" />
-        </Link>
-
-        <div className="navbar-search">
-          <Search size={20} className="search-icon" />
-          <input
-            type="text"
-            placeholder="Search collections, NFTs, and creators"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
-          />
-        </div>
-
-        <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
-          <Link to="/marketplace" className={`nav-link ${isActiveLink('/marketplace') ? 'active' : ''}`}>Explore</Link>
-          <Link to="/collections" className={`nav-link ${isActiveLink('/collections') ? 'active' : ''}`}>Collections</Link>
-          <Link to="/stats" className={`nav-link ${isActiveLink('/stats') ? 'active' : ''}`}>Stats</Link>
-          <Link to="/create" className={`nav-link ${isActiveLink('/create') ? 'active' : ''}`}>Create</Link>
-        </div>
-
-        <div className="navbar-actions">
-          <button className="action-btn cart-btn" title="Shopping Cart">
-            <ShoppingCart size={20} />
-          </button>
-
-          {isConnected && (
-            <button className="action-btn profile-btn" title="Profile" onClick={() => navigate('/profile')}>
-              <User size={20} />
-            </button>
-          )}
-
-          <div className="login-btn">
-            <ConnectButton chainStatus="icon" showBalance={false} />
+        {/* Left: Search bar */}
+        <div className="navbar-left">
+          <div className="navbar-search">
+            <Search size={20} className="search-icon" />
+            <input
+              type="text"
+              placeholder="Search collections, NFTs, and creators"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
           </div>
         </div>
 
-        <button className="mobile-menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Right: Logo + Links + Actions */}
+        <div className="navbar-right">
+          <Link to="/" className="navbar-logo">
+            <img src={SentientLogo} alt="Sentient" className="logo-image" />
+          </Link>
+
+          <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
+            <Link to="/marketplace" className={`nav-link ${isActiveLink('/marketplace') ? 'active' : ''}`}>Explore</Link>
+            <Link to="/collections" className={`nav-link ${isActiveLink('/collections') ? 'active' : ''}`}>Collections</Link>
+            <Link to="/stats" className={`nav-link ${isActiveLink('/stats') ? 'active' : ''}`}>Stats</Link>
+            <Link to="/create" className={`nav-link ${isActiveLink('/create') ? 'active' : ''}`}>Create</Link>
+          </div>
+
+          <div className="navbar-actions">
+            <button className="action-btn cart-btn" title="Shopping Cart">
+              <ShoppingCart size={20} />
+            </button>
+
+            {isConnected && (
+              <button className="action-btn profile-btn" title="Profile" onClick={() => navigate('/profile')}>
+                <User size={20} />
+              </button>
+            )}
+
+            <div className="login-btn">
+              <ConnectButton chainStatus="icon" showBalance={false} />
+            </div>
+          </div>
+
+          <button className="mobile-menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
     </nav>
   );
