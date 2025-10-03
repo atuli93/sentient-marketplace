@@ -48,7 +48,7 @@ const CryptoBar: React.FC = () => {
           rel="noreferrer"
           className="support-link"
         >
-          Support
+          <h3>Support</h3>
         </a>
       </div>
     </div>
