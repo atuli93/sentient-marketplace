@@ -57,7 +57,7 @@
   flex-shrink: 0;
 }
 .logo-image {
-  height: 70px;
+  height: 60px;
   object-fit: contain;
   transition: transform 0.3s ease;
 }
@@ -75,7 +75,7 @@
 /* Nav Links */
 .navbar-links {
   display: flex;
-  gap: 16px;
+  gap: 24px;
 }
 .nav-link {
   color: #aaa;
@@ -166,4 +166,5 @@
   }
   .mobile-menu-toggle { display: flex; }
 }
+
 
