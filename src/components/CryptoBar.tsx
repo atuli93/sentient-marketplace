@@ -17,7 +17,7 @@ const CryptoBar: React.FC = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        // Simulate API fetch - replace with real API calls
+        // Simulated API fetch - replace with real API calls
         const ethPrice = '$4476.26';
         const gasPrice = '45 GWEI';
         const status = 'Live';
