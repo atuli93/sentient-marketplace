@@ -1,4 +1,5 @@
-import React, { ReactNode, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import type { ReactNode } from "react";
 import Navbar from "../components/common/Navbar";
 import Chatbot from "../components/ui/Chatbot";
 
@@ -17,9 +18,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     if (savedTheme) setTheme(savedTheme);
   }, []);
 
-  // Save theme changes
+  // Apply theme + save
   useEffect(() => {
-    document.body.className = theme; // apply theme class on body
+    document.body.className = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
 
@@ -29,7 +30,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className={`main-layout ${theme}`}>
-      {/* Navbar with theme toggle */}
       <header className="layout-header">
         <Navbar />
         <button onClick={toggleTheme} className="theme-toggle-btn">
@@ -37,12 +37,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </button>
       </header>
 
-      {/* Page Content */}
       <main className="main-content" role="main" aria-live="polite">
         {children}
       </main>
 
-      {/* Chatbot */}
       <aside className="layout-chatbot" aria-label="AI Assistant">
         <Chatbot />
       </aside>
