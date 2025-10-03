@@ -2,78 +2,73 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
-  background-color: #161b22;
-  border-top: 1px solid #30363d;
+  right: 0;
+  background-color: #0f1115; /* Darker background */
+  border-top: 1px solid #2e3038;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 40px;
+  padding: 8px 24px;
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   color: #c9d1d9;
   z-index: 1000;
-  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.6);
   user-select: none;
+  box-shadow: 0 -1px 8px rgba(0,0,0,0.8);
 }
 
-.crypto-info {
+/* Left side info */
+.crypto-info span {
+  margin-right: 20px;
   font-weight: 500;
-  color: #58a6ff;
+  color: #8b949e;
 }
 
-.status {
-  display: inline-flex;
-  align-items: center;
+.crypto-info span.status {
+  color: #3ea55f; /* green for live */
   font-weight: 600;
-  color: #58a6ff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-/* Live green blinking dot */
+/* Green blinking dot */
 .live-dot {
-  display: inline-block;
   width: 10px;
   height: 10px;
-  margin-left: 6px;
+  background-color: #3ea55f;
   border-radius: 50%;
-  background-color: #28a745; /* Bright green */
-  animation: blink 1.5s infinite ease-in-out;
-  vertical-align: middle;
+  animation: blink 1.5s infinite;
+  display: inline-block;
 }
 
 @keyframes blink {
-  0%, 50%, 100% {
-    opacity: 1;
-  }
-  25%, 75% {
-    opacity: 0.3;
-  }
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.3; }
 }
 
-.support-section {
-  text-align: right;
-  color: #8b949e;
+/* Right side support links */
+.support-links {
+  display: flex;
+  gap: 16px;
+  align-items: center;
   font-weight: 500;
-  line-height: 1.5;
 }
 
-.support-title {
-  font-weight: 700;
-  color: #f0f6fc;
-  margin-bottom: 4px;
-}
-
-.support-section a {
+.support-link {
   color: #58a6ff;
   text-decoration: none;
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
-.support-section a:hover {
+.support-link:hover,
+.support-link:focus {
   color: #79c0ff;
+  outline: none;
 }
 
-/* Prevent page content from hiding behind the bar */
+/* Padding so page content doesn’t hide behind the bar */
 body, #root {
-  padding-bottom: 60px; /* same height as crypto-bar */
+  padding-bottom: 40px; /* Adjust based on bar height */
 }
