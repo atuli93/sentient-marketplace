@@ -1,112 +1,198 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Search, User, ShoppingCart, Menu, X } from 'lucide-react';
-import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useAuth } from '../../contexts/AuthContext';
-import SentientLogo from '../../assets/sentient-logo-new.png';
-import './Navbar-dark.css';
+/* Dark Theme Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(19, 20, 26, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-primary);
+  padding: 0;
+}
 
-const Navbar: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const { address, isConnected } = useAccount();
-  const { connectWallet, user } = useAuth();
-  const location = useLocation();
-  const navigate = useNavigate();
+.navbar-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
 
-  const isActiveLink = (path: string) => location.pathname === path;
+/* Logo */
+.navbar-logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-  // Auto-connect wallet when detected
-  useEffect(() => {
-    const autoConnect = async () => {
-      if (isConnected && address && !user) {
-        await connectWallet(address, 'injected');
-      }
-    };
-    autoConnect();
-  }, [isConnected, address, user, connectWallet]);
+.logo-image {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
 
-  const handleProfileClick = () => navigate('/profile');
+.navbar-logo:hover .logo-image {
+  transform: scale(1.05);
+}
 
-  return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        {/* Logo */}
-        <Link to="/" className="navbar-logo">
-          <img src={SentientLogo} alt="Sentient" className="logo-image" />
-        </Link>
+/* Search Bar */
+.navbar-search {
+  flex: 1;
+  max-width: 500px;
+  position: relative;
+  margin: 0 24px;
+}
 
-        {/* Search Bar */}
-        <div className="navbar-search">
-          <Search size={20} className="search-icon" />
-          <input
-            type="text"
-            placeholder="Search collections, NFTs, and creators"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
-          />
-        </div>
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  z-index: 1;
+}
 
-        {/* Navigation Links */}
-        <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
-          <Link
-            to="/marketplace"
-            className={`nav-link ${isActiveLink('/') || isActiveLink('/marketplace') ? 'active' : ''}`}
-          >
-            Explore
-          </Link>
-          <Link
-            to="/collections"
-            className={`nav-link ${isActiveLink('/collections') ? 'active' : ''}`}
-          >
-            Collections
-          </Link>
-          <Link
-            to="/stats"
-            className={`nav-link ${isActiveLink('/stats') ? 'active' : ''}`}
-          >
-            Stats
-          </Link>
-          <Link
-            to="/create"
-            className={`nav-link ${isActiveLink('/create') ? 'active' : ''}`}
-          >
-            Create
-          </Link>
-        </div>
+.search-input {
+  width: 100%;
+  padding: 12px 16px 12px 48px;
+  border: 2px solid var(--border-primary);
+  border-radius: 12px;
+  background: var(--bg-card);
+  font-size: 16px;
+  transition: all 0.2s ease;
+  outline: none;
+  color: var(--text-primary);
+}
 
-        {/* User Actions */}
-        <div className="navbar-actions">
-          <button className="action-btn cart-btn" title="Shopping Cart">
-            <ShoppingCart size={20} />
-            <span className="btn-label">Cart</span>
-          </button>
+.search-input:focus {
+  border-color: var(--accent-primary);
+  background: var(--bg-hover);
+}
 
-          {isConnected && (
-            <button className="action-btn profile-btn" onClick={handleProfileClick} title="Profile">
-              <User size={20} />
-              <span className="btn-label">Profile</span>
-            </button>
-          )}
+/* Nav Links */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
 
-          {/* RainbowKit Connect Button - Pink */}
-          <div className="login-btn">
-            <ConnectButton chainStatus="icon" showBalance={false} />
-          </div>
-        </div>
+.nav-link {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 0;
+  transition: color 0.2s ease;
+  position: relative;
+}
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className="mobile-menu-toggle"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-    </nav>
-  );
-};
+.nav-link.active, .nav-link:hover {
+  color: var(--accent-primary);
+}
 
-export default Navbar;
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-primary);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* User Actions */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 200px;
+  justify-content: flex-end;
+}
+
+.action-btn {
+  min-width: 44px;
+  height: 44px;
+  border: 2px solid var(--border-primary);
+  border-radius: 12px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 12px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.action-btn:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background: var(--bg-hover);
+}
+
+/* Pink Connect Wallet Button */
+.login-btn {
+  background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+  color: #fff;
+  border-radius: 12px;
+  display: inline-flex;
+  padding: 0;
+  height: 44px;
+  min-width: 120px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.login-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(255, 20, 147, 0.5);
+}
+
+/* Mobile Menu */
+.mobile-menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--border-primary);
+  border-radius: 12px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-search { display: none; }
+  .navbar-links { 
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: var(--bg-secondary);
+    flex-direction: column;
+    padding: 20px;
+    gap: 16px;
+    transform: translateY(-100%);
+    opacity: 0; visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  .navbar-links.active {
+    transform: translateY(0);
+    opacity: 1; visibility: visible;
+  }
+  .mobile-menu-toggle { display: flex; }
+}
