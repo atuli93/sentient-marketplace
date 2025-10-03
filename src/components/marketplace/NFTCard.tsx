@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Heart, Eye, Clock, Zap } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Eye, Clock, Zap } from 'lucide-react';
 import { type NFT } from '../../types/nft';
 import './NFTCard-dark.css';
 
@@ -12,10 +12,23 @@ interface NFTCardProps {
 const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [showHeart, setShowHeart] = useState(false);
+  const lastTap = useRef<number>(0);
 
   const handleLike = () => {
     setIsLiked(!isLiked);
     onLike?.(nft.id);
+  };
+
+  // Double-tap to like
+  const handleDoubleTap = () => {
+    const now = Date.now();
+    if (now - lastTap.current < 300) {
+      if (!isLiked) handleLike();
+      setShowHeart(true);
+      setTimeout(() => setShowHeart(false), 800);
+    }
+    lastTap.current = now;
   };
 
   const formatPrice = (price: number) => (price < 1 ? price.toFixed(3) : price.toFixed(2));
@@ -32,14 +45,16 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
 
   return (
     <div className="nft-card">
-      {/* NFT Image */}
-      <div className="nft-image-container">
+      <div className="nft-image-container" onClick={handleDoubleTap}>
         <img
           src={nft.image}
           alt={nft.name}
           className={`nft-image ${imageLoaded ? 'loaded' : ''}`}
           onLoad={() => setImageLoaded(true)}
         />
+
+        {/* Instagram-style heart animation */}
+        {showHeart && <div className="double-tap-heart">❤️</div>}
 
         {/* Auction Timer */}
         {nft.auction && (
@@ -49,14 +64,13 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
           </div>
         )}
 
-        {/* Instagram-style Like & View */}
+        {/* Quick Actions */}
         <div className="quick-actions">
           <button
             className={`like-btn ${isLiked ? 'liked' : ''}`}
             onClick={handleLike}
-            aria-label={isLiked ? 'Unlike' : 'Like'}
           >
-            <Heart size={20} fill={isLiked ? '#e0245e' : 'none'} stroke="#fff" />
+            ❤️
           </button>
           <div className="view-count">
             <Eye size={14} />
@@ -78,6 +92,7 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
         <div className="collection-info">
           <span className="collection-name">{nft.collection.name}</span>
         </div>
+
         <h3 className="nft-name">{nft.name}</h3>
 
         <div className="price-section">
@@ -92,9 +107,7 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
           {nft.lastSale && (
             <div className="last-sale">
               <span className="last-sale-label">Last Sale</span>
-              <span className="last-sale-value">
-                {formatPrice(nft.lastSale)} {nft.currency}
-              </span>
+              <span className="last-sale-value">{formatPrice(nft.lastSale)} {nft.currency}</span>
             </div>
           )}
         </div>
@@ -107,9 +120,7 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
                   <Zap size={16} /> Place Bid
                 </button>
               ) : (
-                <button className="buy-btn" onClick={() => onBuy?.(nft.id)}>
-                  Buy Now
-                </button>
+                <button className="buy-btn" onClick={() => onBuy?.(nft.id)}>Buy Now</button>
               )}
             </>
           )}
