@@ -2,73 +2,86 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;
-  background-color: #0f1115; /* Darker background */
-  border-top: 1px solid #2e3038;
+  width: 100%;
+  background-color: #0a0b0d; /* Dark background */
+  border-top: 1px solid #222529;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 24px;
+  padding: 10px 40px;
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   color: #c9d1d9;
   z-index: 1000;
   user-select: none;
-  box-shadow: 0 -1px 8px rgba(0,0,0,0.8);
+  box-shadow: 0 -1px 8px rgba(0, 0, 0, 0.8);
 }
 
-/* Left side info */
-.crypto-info span {
-  margin-right: 20px;
+.crypto-info {
+  display: flex;
+  gap: 20px;
+  align-items: center;
   font-weight: 500;
-  color: #8b949e;
+  color: #58a6ff;
 }
 
-.crypto-info span.status {
-  color: #3ea55f; /* green for live */
-  font-weight: 600;
+.crypto-info span {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-/* Green blinking dot */
-.live-dot {
+.status {
+  color: #39d353; /* Green */
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.live-indicator {
   width: 10px;
   height: 10px;
-  background-color: #3ea55f;
+  background-color: #39d353;
   border-radius: 50%;
+  margin-right: 6px;
   animation: blink 1.5s infinite;
-  display: inline-block;
 }
 
 @keyframes blink {
-  0%, 50%, 100% { opacity: 1; }
-  25%, 75% { opacity: 0.3; }
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
 }
 
-/* Right side support links */
-.support-links {
-  display: flex;
-  gap: 16px;
-  align-items: center;
+.support-section {
+  text-align: right;
+  color: #8b949e;
   font-weight: 500;
+  line-height: 1.5;
+  max-width: 250px;
 }
 
-.support-link {
+.support-section strong {
+  color: #f0f6fc;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.support-section a {
   color: #58a6ff;
   text-decoration: none;
   transition: color 0.2s ease;
-  white-space: nowrap;
 }
 
-.support-link:hover,
-.support-link:focus {
+.support-section a:hover {
   color: #79c0ff;
-  outline: none;
 }
 
-/* Padding so page content doesn’t hide behind the bar */
+/* Avoid page content being hidden behind the bar */
 body, #root {
-  padding-bottom: 40px; /* Adjust based on bar height */
+  padding-bottom: 50px; /* match bar height */
 }
