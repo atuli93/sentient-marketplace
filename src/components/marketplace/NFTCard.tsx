@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Heart, Eye, Clock, Zap } from 'lucide-react';
 import { type NFT } from '../../types/nft';
 import './NFTCard-dark.css';
@@ -18,9 +18,7 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
     onLike?.(nft.id);
   };
 
-  const formatPrice = (price: number) => {
-    return price < 1 ? price.toFixed(3) : price.toFixed(2);
-  };
+  const formatPrice = (price: number) => (price < 1 ? price.toFixed(3) : price.toFixed(2));
 
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
@@ -34,7 +32,6 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
 
   return (
     <div className="nft-card">
-      {/* NFT Image */}
       <div className="nft-image-container">
         <img
           src={nft.image}
@@ -43,14 +40,20 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
           onLoad={() => setImageLoaded(true)}
         />
 
-        {/* ❤️ Heart + 👁️ Views - Top Left */}
-        <div className="left-actions">
-          <button
-            className={`like-btn ${isLiked ? 'liked' : ''}`}
-            onClick={handleLike}
-            title="Like this NFT"
-          >
-            <Heart size={16} fill={isLiked ? '#ff6b6b' : 'none'} />
+        {nft.auction && (
+          <div className="auction-timer">
+            <Clock size={14} />
+            <span>2h 34m</span>
+          </div>
+        )}
+
+        <div className="quick-actions">
+          <button className={`like-btn ${isLiked ? 'liked' : ''}`} onClick={handleLike}>
+            <Heart
+              size={20}
+              stroke={isLiked ? '#ff6b6b' : '#ffffff'}
+              fill={isLiked ? '#ff6b6b' : 'none'}
+            />
           </button>
           <div className="view-count">
             <Eye size={14} />
@@ -58,24 +61,11 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
           </div>
         </div>
 
-        {/* ⏰ Auction Timer */}
-        {nft.auction && (
-          <div className="auction-timer">
-            <Clock size={14} />
-            <span>0h 11m</span>
-          </div>
-        )}
-
-        {/* 🟣 Rarity Badge */}
-        <div
-          className="rarity-badge"
-          style={{ backgroundColor: getRarityColor(nft.rarity) }}
-        >
+        <div className="rarity-badge" style={{ backgroundColor: getRarityColor(nft.rarity) }}>
           {nft.rarity}
         </div>
       </div>
 
-      {/* NFT Info */}
       <div className="nft-info">
         <div className="collection-info">
           <span className="collection-name">{nft.collection.name}</span>
