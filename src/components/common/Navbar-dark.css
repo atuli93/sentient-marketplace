@@ -16,14 +16,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
 }
 
-/* Left section: search + logo */
+/* Left section: search bar only */
 .navbar-left {
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-shrink: 0;
 }
 
 /* Search Bar */
@@ -38,7 +39,7 @@
   color: #888;
 }
 .search-input {
-  width: 250px;
+  width: 280px;
   padding: 10px 12px 10px 36px;
   border-radius: 12px;
   border: 2px solid #2a2a2a;
@@ -51,21 +52,26 @@
   background: #2a2a34;
 }
 
-/* Logo */
-.navbar-logo .logo-image {
+/* Right section: logo + links + cart + wallet */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  flex-grow: 1;
+}
+
+/* Logo (right of search bar) */
+.navbar-logo {
+  margin-left: 12px;
+}
+.logo-image {
   height: 50px;
   object-fit: contain;
   transition: transform 0.3s ease;
 }
 .navbar-logo:hover .logo-image {
   transform: scale(1.05);
-}
-
-/* Right section: links + cart + wallet */
-.navbar-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
 }
 
 /* Navbar Links */
@@ -155,5 +161,5 @@
     visibility: visible;
   }
   .mobile-menu-toggle { display: flex; }
-  .navbar-right { gap: 8px; }
+  .navbar-right { gap: 8px; flex-wrap: wrap; }
 }
