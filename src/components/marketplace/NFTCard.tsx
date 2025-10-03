@@ -54,7 +54,7 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
         {/* Quick Actions */}
         <div className="quick-actions">
           <button
-            className={`like-btn ${isLiked ? '❤️' : ''}`}
+            className={`like-btn ${isLiked ? 'liked' : ''}`}
             onClick={handleLike}
           >
             <Heart size={16} fill={isLiked ? '#ff6b6b' : 'none'} />
@@ -126,4 +126,5 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
 };
 
 export default NFTCard;
+
 
