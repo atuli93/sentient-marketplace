@@ -43,19 +43,12 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
           onLoad={() => setImageLoaded(true)}
         />
 
-        {/* Auction Timer */}
-        {nft.auction && (
-          <div className="auction-timer">
-            <Clock size={14} />
-            <span>2h 34m</span>
-          </div>
-        )}
-
-        {/* Quick Actions */}
-        <div className="quick-actions">
+        {/* Left Actions - Heart + Views */}
+        <div className="left-actions">
           <button
             className={`like-btn ${isLiked ? 'liked' : ''}`}
             onClick={handleLike}
+            title="Like this NFT"
           >
             <Heart size={16} fill={isLiked ? '#ff6b6b' : 'none'} />
           </button>
@@ -64,6 +57,14 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
             <span>{nft.views}</span>
           </div>
         </div>
+
+        {/* Auction Timer */}
+        {nft.auction && (
+          <div className="auction-timer">
+            <Clock size={14} />
+            <span>0h 11m</span>
+          </div>
+        )}
 
         {/* Rarity Badge */}
         <div
@@ -97,7 +98,9 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
           {nft.lastSale && (
             <div className="last-sale">
               <span className="last-sale-label">Last Sale</span>
-              <span className="last-sale-value">{formatPrice(nft.lastSale)} {nft.currency}</span>
+              <span className="last-sale-value">
+                {formatPrice(nft.lastSale)} {nft.currency}
+              </span>
             </div>
           )}
         </div>
