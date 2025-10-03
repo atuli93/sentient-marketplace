@@ -17,50 +17,34 @@ const CryptoBar: React.FC = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        // Simulated API fetch - replace with real API calls
+        // Simulated API values — replace with real API calls if available
         const ethPrice = '$4476.26';
         const gasPrice = '45 GWEI';
         const status = 'Live';
-
         setData({ ethPrice, gasPrice, status });
-      } catch (error) {
-        setData({ ethPrice: 'Error', gasPrice: 'Error', status: 'Error fetching data' });
+      } catch {
+        setData({ ethPrice: 'Error', gasPrice: 'Error', status: 'Error' });
       }
     }
     fetchData();
   }, []);
 
   return (
-    <div className="crypto-bar">
+    <footer className="crypto-bar">
       <div className="crypto-info">
-        ETH: {data.ethPrice} | Gas: {data.gasPrice} |{' '}
+        <span>ETH: {data.ethPrice}</span>
+        <span>Gas: {data.gasPrice}</span>
         <span className="status">
-          Status: {data.status}
-          {data.status === 'Live' && <span className="live-dot" />}
+          <span className="live-dot" title="Live Status" /> {data.status}
         </span>
       </div>
-
-      <div className="support-section">
-        <div className="support-title">Support</div>
-        <div>Name: Atul (your name - atulchief)</div>
-        <div>
-          Twitter:{' '}
-          <a href="https://x.com/Chief_atul" target="_blank" rel="noreferrer">
-            @Chief_atul
-          </a>
-        </div>
-        <div>
-          GitHub:{' '}
-          <a href="https://github.com/atuli93" target="_blank" rel="noreferrer">
-            atuli93
-          </a>
-        </div>
-        <div>
-          Email:{' '}
-          <a href="mailto:atul.chieff60@gmail.com">atul.chieff60@gmail.com</a>
-        </div>
-      </div>
-    </div>
+      <nav className="support-links" aria-label="Support Information">
+        <a href="#" className="support-link" tabIndex={0}>Support</a>
+        <a href="https://x.com/Chief_atul" target="_blank" rel="noreferrer" className="support-link" tabIndex={0}>Twitter @Chief_atul</a>
+        <a href="https://github.com/atuli93" target="_blank" rel="noreferrer" className="support-link" tabIndex={0}>GitHub atuli93</a>
+        <a href="mailto:atul.chieff60@gmail.com" className="support-link" tabIndex={0}>Email</a>
+      </nav>
+    </footer>
   );
 };
 
