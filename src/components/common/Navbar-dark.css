@@ -1,15 +1,12 @@
-/* ===============================
-   Dark Theme NFT Marketplace Navbar
-   =============================== */
+/* ---------------- Dark Theme Navbar ---------------- */
 .navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
   background: rgba(19, 20, 26, 0.95);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid #2a2a36;
+  border-bottom: 1px solid #2a2a2a;
   padding: 0;
-  width: 100%;
 }
 
 .navbar-container {
@@ -24,15 +21,14 @@
 
 /* Logo */
 .navbar-logo {
-  text-decoration: none;
   display: flex;
   align-items: center;
   gap: 12px;
+  text-decoration: none;
 }
 
 .logo-image {
   height: 50px;
-  width: auto;
   object-fit: contain;
   transition: transform 0.3s ease;
 }
@@ -54,33 +50,28 @@
   left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  color: #7a7a8c;
+  color: #888;
   z-index: 1;
 }
 
 .search-input {
   width: 100%;
   padding: 12px 16px 12px 48px;
-  border: 2px solid #2a2a36;
+  border: 2px solid #2a2a2a;
   border-radius: 12px;
-  background: #13141a;
+  background: #1c1c24;
+  color: #fff;
   font-size: 16px;
-  color: #f0f0f0;
-  transition: all 0.2s ease;
   outline: none;
+  transition: all 0.2s ease;
 }
 
 .search-input:focus {
   border-color: #f26486;
-  background: #1a1b22;
-  box-shadow: 0 0 0 4px rgba(242, 100, 134, 0.2);
+  background: #2a2a34;
 }
 
-.search-input::placeholder {
-  color: #7a7a8c;
-}
-
-/* Navigation Links */
+/* Navbar Links */
 .navbar-links {
   display: flex;
   align-items: center;
@@ -88,12 +79,11 @@
 }
 
 .nav-link {
-  text-decoration: none;
-  color: #b5b5c0;
+  color: #aaa;
   font-weight: 600;
-  font-size: 16px;
-  padding: 8px 0;
+  text-decoration: none;
   position: relative;
+  padding: 8px 0;
   transition: color 0.2s ease;
 }
 
@@ -118,36 +108,34 @@
   width: 100%;
 }
 
-/* User Actions */
+/* Navbar Actions */
 .navbar-actions {
   display: flex;
   align-items: center;
   gap: 16px;
-  min-width: 200px;
-  justify-content: flex-end;
 }
 
+/* Action Buttons */
 .action-btn {
-  min-width: 44px;
-  height: 44px;
-  border: 2px solid #2a2a36;
-  border-radius: 12px;
-  background: #13141a;
-  color: #b5b5c0;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   padding: 0 12px;
+  min-width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 2px solid #2a2a2a;
+  background: #1c1c24;
+  color: #aaa;
+  cursor: pointer;
   transition: all 0.2s ease;
-  position: relative;
 }
 
 .action-btn:hover {
   border-color: #f26486;
+  background: #2a2a34;
   color: #f26486;
-  background: #1a1b22;
 }
 
 .btn-label {
@@ -160,90 +148,54 @@
   display: block;
 }
 
-/* Tooltip */
-.action-btn[title]:hover::after {
-  content: attr(title);
-  position: absolute;
-  bottom: -32px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #1a1b22;
-  color: #f0f0f0;
-  padding: 6px 8px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  white-space: nowrap;
-  z-index: 1000;
-  border: 1px solid #2a2a36;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
-/* RainbowKit Connect Wallet Button - Pink */
-.rainbowkit-connect-button {
+/* RainbowKit Connect Button Override */
+.login-btn .rainbowkit-connect-button {
   background: linear-gradient(135deg, #f26486 0%, #ff69b4 100%) !important;
-  color: #ffffff !important;
-  border: none !important;
+  color: white !important;
   border-radius: 12px !important;
-  font-weight: 600;
-  padding: 8px 16px;
-  box-shadow: 0 2px 6px rgba(242,100,134,0.3);
-  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(242, 100, 134, 0.3) !important;
 }
 
-.rainbowkit-connect-button:hover {
+.login-btn .rainbowkit-connect-button:hover {
   background: linear-gradient(135deg, #ff69b4 0%, #f26486 100%) !important;
-  box-shadow: 0 4px 12px rgba(242,100,134,0.5);
+  box-shadow: 0 6px 16px rgba(242, 100, 134, 0.5) !important;
   transform: translateY(-2px);
 }
 
-/* Mobile Menu Toggle */
+/* Mobile Menu */
 .mobile-menu-toggle {
   display: none;
   width: 44px;
   height: 44px;
-  border: 2px solid #2a2a36;
   border-radius: 12px;
-  background: #13141a;
-  color: #b5b5c0;
+  background: #1c1c24;
+  color: #aaa;
+  border: 2px solid #2a2a2a;
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .navbar-search { max-width: 300px; margin: 0 16px; }
-  .navbar-links { gap: 24px; }
 }
 
 @media (max-width: 768px) {
-  .navbar-container { padding: 12px 16px; gap: 16px; }
   .navbar-search { display: none; }
-
   .navbar-links {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    background: #1a1b22;
-    border-top: 1px solid #2a2a36;
     flex-direction: column;
-    padding: 20px;
+    padding: 16px;
     gap: 16px;
+    background: #1c1c24;
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
   }
-
-  .navbar-links.active { transform: translateY(0); opacity: 1; visibility: visible; }
+  .navbar-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
   .mobile-menu-toggle { display: flex; }
-  .navbar-actions { gap: 8px; }
-}
-
-@media (max-width: 480px) {
-  .navbar-container { gap: 12px; }
-  .rainbowkit-connect-button { padding: 8px 16px; font-size: 13px; min-width: 70px; }
 }
