@@ -1,71 +1,11 @@
-.crypto-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #161b22;
-  border-top: 1px solid #30363d;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 20px; /* ⬅️ Reduced padding */
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;   /* ⬅️ Smaller font */
-  color: #c9d1d9;
-  z-index: 1000;
-  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.6);
-  user-select: none;
-  height: 38px;      /* ⬅️ Explicit height */
-}
-
-.crypto-info {
-  display: flex;
-  gap: 16px;
-  font-weight: 500;
+.support-link {
   color: #58a6ff;
-  align-items: center;
-}
-
-.status {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.live-indicator {
-  width: 8px;
-  height: 8px;
-  background-color: #2ecc71; /* green */
-  border-radius: 50%;
-  animation: blink 1.2s infinite ease-in-out;
-}
-
-@keyframes blink {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.3;
-  }
-}
-
-.support-section {
-  text-align: right;
-  color: #8b949e;
   font-weight: 500;
-  line-height: 1.2;
-}
-
-.support-section a {
-  color: #58a6ff;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.support-section a:hover {
+.support-link:hover {
   color: #79c0ff;
-}
-
-body, #root {
-  padding-bottom: 40px; /* match bar height + a bit extra */
+  text-decoration: underline;
 }
