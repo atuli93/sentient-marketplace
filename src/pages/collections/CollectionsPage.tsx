@@ -1,47 +1,72 @@
 import React from "react";
 import "./CollectionsPage.css";
 
-// Simple data array (easier to update)
+// Import your NFT images
+import AbstractRealm from "../assets/Abstract_Realm.jpg";
+import Azuki from "../assets/Azuki.jpg";
+import BoredApe from "../assets/Bored_Ape_Yacht_Club.jpg";
+import CloneX from "../assets/CloneX.jpg";
+import CryptoPunks from "../assets/CryptoPunks.jpg";
+import CyberWarrior from "../assets/Cyber_Warrior.jpg";
+import DeGod from "../assets/DeGod.jpg";
+import Doodles from "../assets/Doodles.jpg";
+
 const collections = [
   {
     id: 1,
-    name: "Cosmic Wanderers",
-    image:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=200&fit=crop",
-    floor: "9.3 ETH",
-    volume: "7.4K ETH",
-  },
-  {
-    id: 2,
-    name: "Neon Dreams",
-    image:
-      "https://images.unsplash.com/photo-1627328715728-7bcc1b5db87d?w=400&h=200&fit=crop",
-    floor: "5.2 ETH",
-    volume: "3.1K ETH",
-  },
-  {
-    id: 3,
-    name: "Pixel Samurai",
-    image:
-      "https://images.unsplash.com/photo-1611419010196-b43f7aa7c8f8?w=400&h=200&fit=crop",
-    floor: "2.8 ETH",
-    volume: "1.9K ETH",
-  },
-  {
-    id: 4,
     name: "Abstract Realm",
-    image:
-      "https://images.unsplash.com/photo-1618001789159-5cf8e31804d1?w=400&h=200&fit=crop",
+    image: AbstractRealm,
     floor: "12 ETH",
     volume: "9.2K ETH",
   },
   {
+    id: 2,
+    name: "Azuki",
+    image: Azuki,
+    floor: "15 ETH",
+    volume: "11.4K ETH",
+  },
+  {
+    id: 3,
+    name: "Bored Ape Yacht Club",
+    image: BoredApe,
+    floor: "45 ETH",
+    volume: "60K ETH",
+  },
+  {
+    id: 4,
+    name: "CloneX",
+    image: CloneX,
+    floor: "10 ETH",
+    volume: "8.5K ETH",
+  },
+  {
     id: 5,
-    name: "Cyber Warriors",
-    image:
-      "https://images.unsplash.com/photo-1621961458944-60aa1e7c50a3?w=400&h=200&fit=crop",
+    name: "CryptoPunks",
+    image: CryptoPunks,
+    floor: "85 ETH",
+    volume: "80K ETH",
+  },
+  {
+    id: 6,
+    name: "Cyber Warrior",
+    image: CyberWarrior,
     floor: "7.5 ETH",
     volume: "6.3K ETH",
+  },
+  {
+    id: 7,
+    name: "DeGod",
+    image: DeGod,
+    floor: "12 ETH",
+    volume: "9.7K ETH",
+  },
+  {
+    id: 8,
+    name: "Doodles",
+    image: Doodles,
+    floor: "5.2 ETH",
+    volume: "4.1K ETH",
   },
 ];
 
@@ -68,7 +93,6 @@ const CollectionsPage: React.FC = () => {
           </div>
         ))}
 
-        {/* Placeholder for future collections */}
         <div className="coming-soon">
           <h2>More Collections Coming Soon</h2>
           <p>We're working on bringing you more amazing collections!</p>
