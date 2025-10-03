@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        {/* Left: Search + Nav Links */}
+        {/* Left: Search + Logo */}
         <div className="navbar-left">
           <div className="navbar-search">
             <Search size={20} className="search-icon" />
@@ -37,36 +37,36 @@ const Navbar: React.FC = () => {
             />
           </div>
 
-          <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
-            <Link to="/marketplace" className={`nav-link ${isActiveLink('/marketplace') ? 'active' : ''}`}>Explore</Link>
-            <Link to="/collections" className={`nav-link ${isActiveLink('/collections') ? 'active' : ''}`}>Collections</Link>
-            <Link to="/stats" className={`nav-link ${isActiveLink('/stats') ? 'active' : ''}`}>Stats</Link>
-            <Link to="/create" className={`nav-link ${isActiveLink('/create') ? 'active' : ''}`}>Create</Link>
+          <div className="navbar-logo">
+            <Link to="/">
+              <img src={SentientLogo} alt="Sentient" className="logo-image" />
+            </Link>
           </div>
         </div>
 
-        {/* Center: Logo */}
-        <div className="navbar-logo">
-          <Link to="/">
-            <img src={SentientLogo} alt="Sentient" className="logo-image" />
-          </Link>
+        {/* Middle: Nav Links */}
+        <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
+          <Link to="/marketplace" className={`nav-link ${isActiveLink('/marketplace') ? 'active' : ''}`}>Explore</Link>
+          <Link to="/collections" className={`nav-link ${isActiveLink('/collections') ? 'active' : ''}`}>Collections</Link>
+          <Link to="/stats" className={`nav-link ${isActiveLink('/stats') ? 'active' : ''}`}>Stats</Link>
+          <Link to="/create" className={`nav-link ${isActiveLink('/create') ? 'active' : ''}`}>Create</Link>
         </div>
 
-        {/* Right: Cart + Profile + Wallet */}
+        {/* Right: Cart + Wallet + Profile */}
         <div className="navbar-actions">
           <button className="action-btn cart-btn" title="Shopping Cart">
             <ShoppingCart size={20} />
           </button>
+
+          <div className="login-btn">
+            <ConnectButton chainStatus="icon" showBalance={false} />
+          </div>
 
           {isConnected && (
             <button className="action-btn profile-btn" title="Profile" onClick={() => navigate('/profile')}>
               <User size={20} />
             </button>
           )}
-
-          <div className="login-btn">
-            <ConnectButton chainStatus="icon" showBalance={false} />
-          </div>
 
           <button className="mobile-menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
