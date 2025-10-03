@@ -43,7 +43,7 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
           onLoad={() => setImageLoaded(true)}
         />
 
-        {/* Left Actions - Heart + Views */}
+        {/* ❤️ Heart + 👁️ Views - Top Left */}
         <div className="left-actions">
           <button
             className={`like-btn ${isLiked ? 'liked' : ''}`}
@@ -58,7 +58,7 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
           </div>
         </div>
 
-        {/* Auction Timer */}
+        {/* ⏰ Auction Timer */}
         {nft.auction && (
           <div className="auction-timer">
             <Clock size={14} />
@@ -66,7 +66,7 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
           </div>
         )}
 
-        {/* Rarity Badge */}
+        {/* 🟣 Rarity Badge */}
         <div
           className="rarity-badge"
           style={{ backgroundColor: getRarityColor(nft.rarity) }}
@@ -77,15 +77,12 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
 
       {/* NFT Info */}
       <div className="nft-info">
-        {/* Collection */}
         <div className="collection-info">
           <span className="collection-name">{nft.collection.name}</span>
         </div>
 
-        {/* NFT Name */}
         <h3 className="nft-name">{nft.name}</h3>
 
-        {/* Price Section */}
         <div className="price-section">
           <div className="current-price">
             <span className="price-label">Price</span>
@@ -105,7 +102,6 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft, onLike, onBuy }) => {
           )}
         </div>
 
-        {/* Action Buttons */}
         <div className="action-buttons">
           {nft.onSale && (
             <>
