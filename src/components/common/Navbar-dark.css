@@ -19,7 +19,7 @@
   gap: 16px;
 }
 
-/* Left: Search */
+/* Left: Search + Logo */
 .navbar-left {
   display: flex;
   align-items: center;
@@ -52,12 +52,13 @@
   background: #2a2a34;
 }
 
-/* Center: Logo */
+/* Logo */
 .navbar-logo {
   order: 2;
+  margin-left: 40px; /* Adjust this value to move logo 1-2 tabs right */
 }
 .logo-image {
-  height: 70px; /* bigger logo */
+  height: 60px;
   object-fit: contain;
   transition: transform 0.3s ease;
 }
@@ -69,7 +70,7 @@
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
 }
 
 /* Nav Links */
@@ -79,11 +80,11 @@
 }
 .nav-link {
   color: #aaa;
-  font-weight: 700;
-  font-size: 20px; /* increased size */
+  font-weight: 700;   /* Lighter weight for smaller look */
+  font-size: 18px;    /* Smaller font size */
   text-decoration: none;
   position: relative;
-  padding: 8px 0;
+  padding: 8px 0;     /* Adjust vertical padding */
   transition: color 0.2s ease;
 }
 .nav-link.active,
@@ -141,22 +142,6 @@
 .login-btn .rainbowkit-connect-button:hover {
   background: #ff5a8b !important;
   transform: translateY(-2px);
-}
-
-/* Diwali effect for logo */
-.diwali-effect {
-  animation: glow 1.5s infinite alternate, sparkle 2s infinite;
-}
-@keyframes glow {
-  0% { filter: drop-shadow(0 0 0px #fecd76); }
-  50% { filter: drop-shadow(0 0 12px #fecd76); }
-  100% { filter: drop-shadow(0 0 0px #fecd76); }
-}
-@keyframes sparkle {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  25% { transform: translateY(-3px) rotate(2deg); }
-  50% { transform: translateY(2px) rotate(-2deg); }
-  75% { transform: translateY(-2px) rotate(1deg); }
 }
 
 /* Mobile Menu */
